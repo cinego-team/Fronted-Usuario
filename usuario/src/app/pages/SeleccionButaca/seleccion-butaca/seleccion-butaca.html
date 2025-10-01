@@ -1,0 +1,40 @@
+<header class="topbar">
+    <img src="assets/logo.png" alt="CineGo" class="logo" />
+    <div class="user">
+      <span class="icon">👤</span>
+      <span class="label">Usuario</span>
+    </div>
+  </header>
+<div class="wrapper">
+  <main class="panel">
+    <div class="screen">PANTALLA</div>
+
+    <div class="rows">
+      <div class="row" *ngFor="let r of rows">
+        <div class="row-label">{{ r }}</div>
+        <button
+          *ngFor="let s of byRow(r); trackBy: trackBySeat"
+          class="seat"
+          [class.selected]="s.status === 'selected'"
+          [class.occupied]="s.status === 'occupied'"
+          [disabled]="s.status === 'occupied'"
+          (click)="toggle(s)">
+          {{ s.id }}
+        </button>
+        <div class="row-label">{{ r }}</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><span class="dot free"></span> Libre</span>
+      <span><span class="dot selected"></span> Seleccionada</span>
+      <span><span class="dot occupied"></span> Ocupada</span>
+      <span class="count">Elegidas: {{ totalSelected() }}</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn ghost" (click)="cancelar()">Cancelar</button>
+      <button class="btn" [disabled]="totalSelected()===0" (click)="continuar()">Continuar</button>
+    </div>
+  </main>
+</div>

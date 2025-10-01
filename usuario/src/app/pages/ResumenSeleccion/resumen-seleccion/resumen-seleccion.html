@@ -1,0 +1,36 @@
+<header class="topbar">
+    <img src="assets/logo.png" alt="CineGo" class="logo" />
+    <div class="user">
+      <span class="icon">👤</span>
+      <span class="label">Usuario</span>
+    </div>
+    </header>
+<div class="wrapper">
+  <main class="panel">
+    <div class="summary-card">
+      <div class="summary-cols">
+        <div class="col left">
+          <h3>Tu selección:</h3>
+          <p>Película X</p>
+          <p>Día - XX/XX</p>
+          <p>Formato - XXXXX</p>
+        </div>
+
+        <div class="col right">
+          <h3>Tus Butacas:</h3>
+          <p *ngIf="asientos.length; else noSeats">
+            {{ asientos.join(', ') }}
+          </p>
+          <ng-template #noSeats>
+            <em>No seleccionaste butacas.</em>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="summary-actions">
+        <button class="btn ghost" (click)="cancelar()">Cancelar</button>
+        <button class="btn" [disabled]="!asientos.length" (click)="pagar()">Pagar</button>
+      </div>
+    </div>
+  </main>
+</div>
