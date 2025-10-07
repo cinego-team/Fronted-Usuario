@@ -1,15 +1,24 @@
 /* Fondo general */
 .login-container {
-  background-color: #4b0d0d; /* Fondo vino oscuro */
+  background-color: #4f1917; /* Fondo vino oscuro */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* header */
+.topbar{ display: flex;justify-content: space-between; align-items: center; padding: 12px 18px;}
+.logo{height: 120px;
+   position: absolute; /* permite ubicar el elemento */
+  top: 0;             /* esquina superior */
+  left: 0;            /* esquina izquierda */
+  width: 120px;       /* ajusta tamaño */
+
+}
 
 /* Caja del login */
 .login-box {
-  background-color: #8b0f0f; /* Rojo principal */
+  background-color: #8a1009; /* Rojo principal */
   padding: 2rem;
   border-radius: 20px;
   width: 350px;
@@ -41,7 +50,7 @@
   border: none;
   margin-bottom: 0.8rem;
   font-size: 1rem;
-  background-color: #f5c5c5;
+  background-color: #ebccc7;
   outline: none;
 }
 
@@ -58,8 +67,8 @@
 
 /* Botón de inicio de sesión */
 .btn-login {
-  background-color: #f5c5c5;
-  color: #8b0f0f;
+  background-color: #ebccc7;
+  color:  #8a1009;
   font-weight: bold;
   border: none;
   padding: 0.7rem 2rem;
