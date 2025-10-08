@@ -1,0 +1,94 @@
+/* Fondo general */
+.login-container {
+  background-color: #4f1917; /* Fondo vino oscuro */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* header */
+.topbar{ display: flex;justify-content: space-between; align-items: center; padding: 12px 18px;}
+.logo{height: 120px;
+   position: absolute; /* permite ubicar el elemento */
+  top: 0;             /* esquina superior */
+  left: 0;            /* esquina izquierda */
+  width: 120px;       /* ajusta tamaño */
+
+}
+
+/* Caja del login */
+.login-box {
+  background-color: #8a1009; /* Rojo principal */
+  padding: 2rem;
+  border-radius: 20px;
+  width: 350px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Título */
+.login-box h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Labels */
+.login-box label {
+  display: block;
+  text-align: left;
+  margin: 0.5rem 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+.login-box input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  background-color: #ebccc7;
+  outline: none;
+}
+
+/* Enlace de recuperar contraseña */
+.forgot-password {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #fff;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+/* Botón de inicio de sesión */
+.btn-login {
+  background-color: #ebccc7;
+  color:  #8a1009;
+  font-weight: bold;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #fff;
+}
+
+/* Texto registro */
+.register-text {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.register-text a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: bold;
+}

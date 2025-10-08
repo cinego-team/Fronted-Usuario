@@ -1,0 +1,30 @@
+<div class="login-container">
+  <header class="topbar">
+    <img src="assets/logo.png" alt="CineGo" class="logo" />
+  </header>
+
+  <div class="login-box">
+    <h2>¡BIENVENIDO!</h2>
+
+    <form>
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" />
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password"  />
+
+      <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+
+      <!-- botón con (click) -->
+      <div class="actions">
+        <button type="button" class="btn-login" (click)="OnLogin()">INICIAR SESIÓN</button>
+      </div>
+
+      <p class="register-text">
+        ¿Aún no tienes cuenta?
+        <!-- enlace con (click) -->
+        <a  (click)="Registro()">Regístrate aquí</a>
+      </p>
+    </form>
+  </div>
+</div>
