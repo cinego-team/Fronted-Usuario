@@ -1,0 +1,29 @@
+<div class="container">
+  <header class="header">
+        <img src="assets/image.png" alt="CineGo" class="logo" />
+    <div class="user-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" (click)="OnUsuario()">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>Usuario</span>
+    </div>
+  </header>
+
+  <h1 class="titulo-cartelera">CARTELERA</h1>
+
+  <div class="peliculas-grid">
+    <div 
+      class="pelicula-card" 
+      *ngFor="let pelicula of peliculas"
+      (click)="seleccionarPelicula(pelicula)">
+      <div class="poster-container">
+        <img [src]="pelicula.poster" [alt]="pelicula.titulo" class="poster">
+      </div>
+      <div class="pelicula-info">
+        <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
+        <p class="pelicula-detalles">{{ pelicula.estado }} - {{ pelicula.clasificacion }} - {{ pelicula.genero }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,338 @@
+
+
+.funcion-container {
+  min-height: 100vh;
+  min-width: 1520px;
+  background: linear-gradient(135deg, #4a1515 0%, #2d0a0a 100%);
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  height: 50px;
+}
+
+.user-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  color: white;
+}
+
+.user-icon span {
+  font-size: 0.75rem;
+}
+
+.user-text {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Información de la película */
+.pelicula-info {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.poster {
+  flex-shrink: 0;
+}
+
+.poster img {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 3px solid #8b3a3a;
+  background-color: #6b2424;
+}
+
+.detalles {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.detalles h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.detalles p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Lista scrolleable de funciones */
+.funciones-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.5rem;
+}
+
+.funciones-scroll h2 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.funciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Tarjeta de función */
+.funcion-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.funcion-header {
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #8b3a3a;
+  padding-bottom: 0.8rem;
+}
+
+.funcion-header h3 {
+  color: #4a1a1a;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.funcion-detalles {
+  color: #6b2424;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Horarios */
+.horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.horario-btn {
+  padding: 0.7rem 1.5rem;
+  border: 2px solid #8b3a3a;
+  border-radius: 25px;
+  background-color: #f5e6d3;
+  color: #4a1a1a;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.horario-btn:hover:not(:disabled) {
+  background-color: #8b3a3a;
+  color: white;
+  transform: scale(1.05);
+}
+
+.horario-btn.selected {
+  background-color: #8b3a3a;
+  color: white;
+  border-color: #6b2424;
+}
+
+.horario-btn.no-disponible {
+  background-color: #d4d4d4;
+  color: #888;
+  border-color: #aaa;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Footer con botones */
+.footer-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-volver,
+.btn-continuar {
+  flex: 1;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-volver {
+  background-color: #d4b5a0;
+  color: #4a1a1a;
+}
+
+.btn-volver:hover {
+  background-color: #c4a590;
+  transform: scale(1.02);
+}
+
+.btn-continuar {
+  background-color: #8b3a3a;
+  color: white;
+}
+
+.btn-continuar:hover:not(:disabled) {
+  background-color: #a04545;
+  transform: scale(1.02);
+}
+
+.btn-continuar:disabled {
+  background-color: #6b2424;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sinopsis-box {
+  flex: 1;
+  background-color: #f5e6d3;
+  border: 3px solid #8b3a3a;
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #4a1a1a;
+  min-height: 180px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sinopsis-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #4a1a1a;
+}
+
+.sinopsis-box p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4a1a1a;
+}
+
+
+/* Scrollbar personalizado */
+.funciones-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.funciones-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.funciones-scroll::-webkit-scrollbar-thumb {
+  background: #8b3a3a;
+  border-radius: 10px;
+}
+
+.funciones-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a04545;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #f5e6d3;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+  color: #4a1a1a;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.modal-content p {
+  color: #4a1a1a;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.modal-buttons button {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: #d4b5a0;
+  color: #4a1a1a;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #c4a590;
+  transform: scale(1.05);
+}
+
+.modal-buttons button:last-child {
+  background-color: #8b3a3a;
+  color: white;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #a04545;
+  transform: scale(1.05);
+}

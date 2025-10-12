@@ -1,0 +1,86 @@
+<div class="funcion-container">
+  <header class="header">
+        <img src="assets/image.png" alt="CineGo" class="logo" />
+    <div class="user-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>Usuario</span>
+    </div>
+  </header>
+
+  <!-- Información de la película -->
+  <div class="pelicula-info">
+    <div class="poster">
+      <img [src]="pelicula.poster" [alt]="pelicula.titulo" />
+    </div>
+    <div class="detalles">
+        <h1>{{ pelicula.titulo }}</h1>
+        <p><strong>Director:</strong> {{ pelicula.director }}</p>
+        <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
+        <p><strong>Clasificación:</strong> {{ pelicula.clasificacion }}</p>
+      </div>
+
+  <div class="sinopsis-box">
+        <h3>Sinopsis:</h3>
+        <p>{{ pelicula.sinopsis }}</p>
+    </div>
+  </div>
+
+  <!-- Lista scrolleable de funciones -->
+  <div class="funciones-scroll">
+    <h2>Funciones Disponibles</h2>
+    
+    <div class="funciones-lista">
+      <div 
+        *ngFor="let funcion of funciones" 
+        class="funcion-card"
+      >
+        <div class="funcion-header">
+          <h3>{{ funcion.dia }} {{ funcion.fecha }}</h3>
+          <p class="funcion-detalles">{{ funcion.formato }} - {{ funcion.idioma }}</p>
+        </div>
+        
+        <div class="horarios">
+          <button
+            *ngFor="let horario of funcion.horarios"
+            [class.selected]="funcionSeleccionada?.id === funcion.id && horarioSeleccionado === horario.hora"
+            [class.no-disponible]="!horario.disponible"
+            [disabled]="!horario.disponible"
+            (click)="seleccionarHorario(funcion, horario.hora)"
+            class="horario-btn"
+          >
+            {{ horario.hora }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón de continuar -->
+  <div class="footer-actions">
+    <button class="btn-volver" (click)="volver()">Volver</button>
+    <button 
+      class="btn-continuar" 
+      (click)="continuarCompra()"
+      [disabled]="!funcionSeleccionada || !horarioSeleccionado"
+    >
+      Continuar con la compra
+    </button>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cancelarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>Tu selección:</h3>
+    <p class="modal-pelicula">{{ pelicula.titulo }}</p>
+    <p class="modal-detalle">{{ funcionSeleccionada?.dia }} {{ funcionSeleccionada?.fecha }} - {{ horarioSeleccionado }}</p>
+    <p class="modal-detalle">{{ funcionSeleccionada?.formato }} - {{ funcionSeleccionada?.idioma }}</p>
+    
+    <div class="modal-buttons">
+      <button class="btn-modal btn-cancelar" (click)="cancelarModal()">Cancelar</button>
+      <button class="btn-modal btn-continuar-modal" (click)="confirmarCompra()">Continuar</button>
+    </div>
+  </div>
+</div>
