@@ -3,16 +3,15 @@ import { SeleccionButacaComponent } from './pages/SeleccionButaca/seleccion-buta
 import { ResumenSeleccionComponent } from './pages/ResumenSeleccion/resumen-seleccion/resumen-seleccion';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
-import { PeliculaListaComponent } from './pages/lista-pelicula/lista-pelicula';
-import { FuncionComponent } from './pages/funcion/funcion';
+import { CarteleraComponent } from './pages/cartelera/cartelera';
+import { PeliculaComponent } from './pages/pelicula/pelicula';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'cartelera', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'cartelera', component: CarteleraComponent },
+  { path: 'pelicula/:id', component: PeliculaComponent },
   { path: 'seleccion-butaca', component: SeleccionButacaComponent },
   { path: 'resumen-seleccion', component: ResumenSeleccionComponent },
-  { path: '', redirectTo: 'seleccion-butaca', pathMatch: 'full' },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'lista-pelicula', component: PeliculaListaComponent },
-  { path: 'funcion/:id', component: FuncionComponent },
 ];

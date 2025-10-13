@@ -5,18 +5,11 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   imports: [],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrl: './login.css',
 })
 export class LoginComponent {
-  constructor(
-    private router: Router,
-    
-   
-  ) { }
- OnLogin() {
+  constructor(private router: Router) {}
+  OnLogin() {
     this.router.navigate(['/home']);
-  }
-   Registro() {
-    this.router.navigate(['/register']);
   }
 }
