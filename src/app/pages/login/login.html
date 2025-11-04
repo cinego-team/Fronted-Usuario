@@ -1,8 +1,10 @@
 <div class="login-container">
+  <!-- Logo superior -->
   <header class="topbar">
-    <img src="assets/logo.png" alt="CineGo" class="logo" />
+    <img src="/assets/logo.png" alt="CineGo" class="logo" />
   </header>
 
+  <!-- Caja del login -->
   <div class="login-box">
     <h2>¡BIENVENIDO!</h2>
 
@@ -15,14 +17,18 @@
 
       <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
-      <!-- botón con (click) -->
       <div class="actions">
-        <button type="button" class="btn-login" (click)="OnLogin()">INICIAR SESIÓN</button>
+        <button
+          type="button"
+          class="btn-login"
+          (click)="OnLogin()"
+        >
+          INICIAR SESIÓN
+        </button>
       </div>
 
       <p class="register-text">
         ¿Aún no tienes cuenta?
-        <!-- enlace con (click) -->
         <a href="register">Regístrate aquí</a>
       </p>
     </form>

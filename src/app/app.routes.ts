@@ -5,13 +5,15 @@ import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
 import { CarteleraComponent } from './pages/cartelera/cartelera';
 import { PeliculaComponent } from './pages/pelicula/pelicula';
-
+import { notificaciondeenvioComponent } from './pages/NotificacionDeEnvio/notificaciondeenvio';
 export const routes: Routes = [
-  { path: '', redirectTo: 'cartelera', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cartelera', component: CarteleraComponent },
   { path: 'pelicula/:id', component: PeliculaComponent },
   { path: 'seleccion-butaca', component: SeleccionButacaComponent },
   { path: 'resumen-seleccion', component: ResumenSeleccionComponent },
+  {path: 'notificaciondeenvio', component: notificaciondeenvioComponent}
 ];
+

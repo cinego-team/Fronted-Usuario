@@ -172,6 +172,6 @@ export class PeliculaComponent implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/lista-pelicula']);
+    this.router.navigate(['/cartelera']);
   }
 }

@@ -135,4 +135,7 @@ export class CarteleraComponent implements OnInit {
   OnUsuario() {
     this.router.navigate(['/login']);
   }
+  volver(): void {
+    this.router.navigate(['/cartelera']);
+  }
 }

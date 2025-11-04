@@ -10,6 +10,6 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private router: Router) {}
   OnLogin() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/cartelera']);
   }
 }

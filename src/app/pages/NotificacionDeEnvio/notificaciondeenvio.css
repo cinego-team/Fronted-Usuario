@@ -1,0 +1,104 @@
+/* Fondo completo */
+.screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .8rem 1.2rem;
+  background: transparent;
+}
+.logo { height: 70px; object-fit: contain; }
+.user-icon { height: 70px; }
+.user-section { display:flex; flex-direction:column; align-items:center; color:#f8d8c4; font-size:14px; }
+
+/* Contenido alineado ARRIBA y centrado horizontalmente */
+.content{
+  flex: 1;
+  display: grid;
+  justify-items: center;     /* centrada horizontal */
+  align-content: start;      /* pegada arriba */
+  padding: 120px 1rem 2rem;  /* espacio desde el header */
+  min-height: calc(100vh - 120px);
+}
+
+/* En móvil dejamos un poco menos de espacio */
+@media (max-width: 600px){
+  .content{
+    padding-top: 96px;
+    min-height: calc(100vh - 96px);
+  }
+}
+
+
+/* Tarjeta del mensaje */
+.card {
+  background: #6e0202;            /* rojo profundo como tu screenshot */
+  color: #fff;
+  border-radius: 24px;
+  padding: 1.25rem 1.4rem;
+  width: min(820px, 92%);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Tipografía del mensaje */
+.card h1 {
+  font-size: clamp(20px, 3.2vw, 28px);
+  margin: 0 0 .6rem 0;
+  font-weight: 800;
+}
+.card p {
+  margin: .25rem 0;
+  font-size: clamp(14px, 2.3vw, 18px);
+  line-height: 1.4;
+}
+
+/* Botones */
+.actions {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-top: .9rem;
+}
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: .65rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.primary { background:#ebccc7; color:#6e0202; }
+.ghost   { background:rgba(255,255,255,.18); color:#fff; }
+
+/* Email opcional debajo */
+.hint { margin-top:.6rem; opacity:.9; font-size: .95rem; }
+
+/* Responsive fino */
+@media (max-width: 600px){
+  .logo, .user-icon { height: 56px; }
+  .card { border-radius: 20px; padding: 1rem 1.1rem; }
+  .actions .btn { flex: 1 1 100%; }
+}
+
+.logo-link {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.logo-link img {
+  transition: transform 0.2s ease;
+}
+
+.logo-link img:hover {
+  transform: scale(1.05);
+}

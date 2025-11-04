@@ -6,18 +6,34 @@
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
-.wrapper{ max-width:1000px; margin:0 auto; padding:16px; }
-
-.topbar{
-  display:grid;
-  grid-template-columns: 140px 1fr 120px;
-  align-items:center;
-  gap:12px;
-  margin-bottom:8px;
+.wrapper {
+  max-width: 100%;
+  padding: 16px;
 }
-.logo{ height:48px; object-fit:contain; }
-.topbar h1{ text-align:center; font-size:24px; font-weight:800; margin:0; }
-.user{ text-align:right; opacity:.9; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.logo {
+  height: 80px;
+  object-fit: contain;
+  margin-left: 0;
+}
+.user-icon {
+  height: 80px;
+  margin-right: 8px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  color: #f8d8c4;
+  font-size: 14px;
+  flex-direction: column;
+}
 
 .panel{
   background:#3a0f0f;
@@ -49,8 +65,31 @@ p{ margin:6px 0; font-weight:700; color:#ffeae5; }
 }
 
 .btn{
-  background:#ffb9a6; color:#2b0d0d; border:0; padding:12px 28px;
+  background:#ebccc7; color:#2b0d0d; border:0; padding:12px 28px;
   border-radius:18px; font-weight:900; cursor:pointer; font-size:18px;
 }
 .btn:disabled{ opacity:.55; cursor:not-allowed; }
-.btn.ghost{ background:#f1e1dc; }
+.btn.ghost{ background:#ebccc7; }
+
+:host .checkout { display: grid; gap: 1rem; }
+
+/* Desktop: contenido + sidebar (no cambia tu estilo, solo define columnas) */
+@media (min-width: 992px){
+  :host .checkout { grid-template-columns: 1fr 320px; align-items: start; }
+}
+
+/* Filas internas sin tocar tipografías que ya tenés */
+:host .row { display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+
+.logo-link {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.logo-link img {
+  transition: transform 0.2s ease;
+}
+
+.logo-link img:hover {
+  transform: scale(1.05);
+}

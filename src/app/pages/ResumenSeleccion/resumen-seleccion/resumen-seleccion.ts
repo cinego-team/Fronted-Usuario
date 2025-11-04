@@ -41,4 +41,8 @@ export class ResumenSeleccionComponent {
     // Integrar pago aquí
     alert(`Pagando ${this.pelicula} - Asientos: ${this.asientos.join(', ')}`);
   }
+
+  volver(): void {
+    this.router.navigate(['/cartelera']);
+  }
 }

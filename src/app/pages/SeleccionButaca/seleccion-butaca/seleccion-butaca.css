@@ -1,24 +1,62 @@
-:host { display: block; background:#4F1917; min-height:100vh; color:#fff; }
-
-.wrapper { max-width: 1000px; margin: 0 auto; padding: 16px; }
-
-.topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
-.topbar h1 { font-size: 20px; font-weight: 700; }
-.logo { height: 50x; }
-
-
-.panel {
-  background: #4F1917;
-  border-radius: 18px;
-  padding: 22px 18px 28px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+:host {
+  display: block;
+  background:#4f1917;
+  min-height:100vh;
+  color:#fff;
+  overflow-x: hidden; /* no scroll lateral */
 }
 
+/* ===== CONTENEDOR ===== */
+.wrapper { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+/* ===== TOPBAR ===== */
+.topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
+.logo { height: 70px; }
+.user-icon { height: 70px; }
+.user-section { display:flex; flex-direction:column; align-items:center; color:#f8d8c4; font-size:14px; }
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: nowrap;       /* desktop */
+  margin-top: 20px;
+}
+
+/* Panel de butacas */
+.panel {
+  background-color: #5a0e0e;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  width: 850px;
+  max-width: 100%;
+}
+
+/* Resumen */
+.summary-panel {
+  background-color: #4f1917;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  color: #fff;
+  min-width: 250px;
+  height: fit-content;
+  display: flex; flex-direction: column; align-items: stretch;
+  margin-top: 40px;
+}
+.summary-panel h2 { text-align:center; margin-bottom:16px; font-weight:800; color:#f8d8c4; letter-spacing:1px; }
+.summary-box { background:#8a1009; border-radius:15px; padding:20px; display:flex; flex-direction:column; gap:14px; }
+.summary-item { display:flex; justify-content:space-between; font-weight:600; color:#f8d8c4; }
+.summary-item.total { border-top:1px solid rgba(255,255,255,.3); padding-top:10px; font-size:1.2rem; color:#fff; }
+
+/* ===== PANTALLA ===== */
 .screen {
   text-align:center;
   background: linear-gradient(#8b4d4d,#c36b6b);
-  color:#2b0d0d;
-  font-weight: 800;
+  color:#2b0d0d; font-weight:800;
   margin: 0 auto 18px;
   width: 85%;
   border-radius: 8px;
@@ -26,62 +64,191 @@
   padding: 6px 0;
 }
 
-.rows { display:flex; flex-direction:column; gap: 8px; margin: 10px auto 16px; width: 95%; }
+/* ===== FILAS Y ASIENTOS (DESKTOP) ===== */
+.rows { display:flex; flex-direction:column; gap:10px; margin:10px auto 16px; width: 100%; align-items:center; }
 
-.row { display:grid; grid-template-columns: 28px repeat(15, 1fr) 28px; align-items:center; gap: 6px; }
-.row-label { text-align:center; opacity:.8; font-weight:600; }
+/* Desktop: 15 asientos por fila + etiquetas */
+.row {
+  display:grid;
+  grid-template-columns: 28px repeat(15, 1fr) 28px;
+  align-items:center;
+  gap: 6px;
+}
+.row-label { text-align:center; opacity:.8; font-weight:600; color:#f8d8c4; }
 
+/* Asiento base */
 .seat {
-  position: relative;
-  border: 0;
-  outline: none;
-  cursor: pointer;
-  border-radius: 8px;
-  padding: 10px 0;
-  font-weight: 700;
-  background: #d65b5b;         /* libre */
-  color: #2b0d0d;
-  box-shadow: inset 0 -6px 0 #b94d4d, 0 2px 0 rgba(0,0,0,.3);
-  transition: transform .05s ease, background .2s ease, box-shadow .2s ease;
-  user-select: none;
+  width: 34px; height: 34px;                 /* tamaño fijo: NO 1fr */
+  border: 0; border-radius: 8px;
+  background: #d65b5b; color:#2b0d0d;
+  font-size:.8rem; font-weight:700;
+  cursor:pointer;
+  box-shadow: inset 0 -3px 0 #b94d4d, 0 2px 0 rgba(0,0,0,.3);
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
 }
 .seat:hover { transform: translateY(-1px); }
+.seat.selected { background:#ff8e7a; box-shadow: inset 0 -3px 0 #e06e63, 0 2px 0 rgba(0,0,0,.3); }
+.seat.occupied { background:#6b6b6b; color:#ddd; cursor:not-allowed; }
 
-.seat.selected {
-  background: #ff8e7a;         /* seleccionada */
-  box-shadow: inset 0 -6px 0 #e06e63, 0 2px 0 rgba(0,0,0,.3);
-}
-
-.seat.occupied {
-  background: #6b6b6b;
-  color: #ddd;
-  box-shadow: inset 0 -6px 0 #555;
-  cursor: not-allowed;
-}
-
+/* Leyenda */
 .legend {
-  display:flex; gap: 18px; align-items:center; justify-content:center;
-  margin: 8px 0 16px;
-  font-weight:600;
+  display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;
+  margin: 8px 0 16px; font-weight:600;
 }
-.legend .dot {
-  display:inline-block; width:16px; height:16px; border-radius:4px; margin-right:6px;
-  box-shadow: inset 0 -3px 0 rgba(0,0,0,.25);
-}
-.legend .free { background:#d65b5b; }
-.legend .selected { background:#ff8e7a; }
-.legend .occupied { background:#6b6b6b; }
+.legend .dot { width:16px; height:16px; border-radius:4px; margin-right:6px; box-shadow: inset 0 -3px 0 rgba(0,0,0,.25); }
+.legend .free{background:#d65b5b;} .legend .selected{background:#ff8e7a;} .legend .occupied{background:#6b6b6b;}
 .legend .count { margin-left:auto; }
 
+/* Acciones */
 .actions {
-  display:flex; justify-content:space-between; max-width: 520px; margin: 0 auto;
+  display:flex; justify-content:space-between; gap: 12px;
+  max-width: 520px; margin: 0 auto;
+  flex-wrap: wrap;
 }
 .btn {
-  background:#ffb9a6; color:#2b0d0d; border:0; padding:12px 22px; border-radius:18px;
-  font-weight:800; cursor:pointer;
+  background:#ebccc7; color:#2b0d0d; border:0;
+  padding:12px 22px; border-radius:18px;
+  font-weight:800; cursor:pointer; min-height:44px;
+  transition:.15s transform;
 }
-.btn:disabled { opacity:.5; cursor:not-allowed; }
-.btn.ghost { background:#f1e1dc; }
-@media (max-width: 720px) {
-  .row { grid-template-columns: 22px repeat(10, 1fr) 22px; } /* si querés menos por fila en mobile */
+.btn:hover:not(:disabled){ transform: translateY(-1px); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+.btn.ghost { background:#ebccc7; }
+
+/* ===== TABLET ===== */
+@media (max-width: 1024px){
+  .main-container { flex-wrap: wrap; gap: 24px; justify-content: center; }
+  .summary-panel { margin-top: 0; width: 100%; max-width: 420px; }
+  .panel { width: 100%; }
+  .row { grid-template-columns: 24px repeat(12, 1fr) 24px; }
 }
+
+/* ===== MÓVIL (mejora estética fuerte) ===== */
+@media (max-width: 600px){
+  .wrapper { padding: 12px; }
+  .panel { padding: 14px 10px; border-radius:16px; }
+  .screen { width: 100%; margin-bottom: 12px; }
+
+  /* Menos butacas por fila y centradas */
+  .row {
+    grid-template-columns: 18px repeat(8, 34px) 18px; /* 8 butacas por fila */
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .seat {
+    width: 32px; height: 32px;            /* un poco más compactas */
+    font-size: .68rem; border-radius: 7px;
+  }
+
+  .legend { gap: 10px; font-size: .9rem; }
+  .legend .count { width: 100%; text-align: center; margin-left: 0; }
+
+  .actions { max-width: none; gap: 10px; }
+  .btn { flex: 1 1 100%; }                /* botones a ancho completo */
+}
+
+/* ===== MÓVIL MUY CHICO (≤360px) ===== */
+@media (max-width: 360px){
+  .row {
+    grid-template-columns: 16px repeat(8, 30px) 16px;
+    gap: 4px;
+  }
+  .seat { width: 30px; height: 30px; font-size: .62rem; }
+}
+
+/* ===== OVERRIDES MÓVIL – NO rompen desktop ===== */
+@media (max-width: 600px){
+
+  /* Más aire general y panel más compacto */
+  :host .wrapper{ padding: 12px; }
+  :host .panel{ padding: 14px 10px; border-radius: 16px; }
+
+  /* Centrar filas y limitar ancho útil */
+  :host .rows{ width: 100%; margin: 10px auto 12px; align-items: center; }
+
+  /* Mantengo 15 asientos por fila (para no romper labels),
+     pero cada asiento es fijo en px y la fila queda centrada */
+  :host .row{
+    grid-template-columns: 16px repeat(15, 28px) 16px; /* 15 asientos de 28px */
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Asiento compacto y prolijo */
+  :host .seat{
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    font-size: 0.7rem;       /* o 0 para ocultar texto (ver opcional abajo) */
+    box-shadow: inset 0 -2px 0 #b94d4d, 0 1px 0 rgba(0,0,0,.25);
+  }
+
+  /* Labels laterales un poco más chicos */
+  :host .row-label{ font-size: 12px; opacity:.9; }
+
+  /* “PANTALLA” a lo ancho */
+  :host .screen{ width: 100%; margin-bottom: 10px; }
+
+  /* Leyenda compacta y centrada */
+  :host .legend{
+    gap: 10px; font-size: 12px; margin: 6px 0 12px;
+    justify-content: center;
+  }
+  :host .legend .count{ width: 100%; margin-left: 0; text-align: center; }
+
+  /* Botones inferiores a ancho completo */
+  :host .actions{ gap: 10px; max-width: none; }
+  :host .btn{ flex: 1 1 100%; min-height: 44px; }
+}
+
+/* MÓVIL MUY CHICO – aún más compacto sin romper layout */
+@media (max-width: 360px){
+  :host .row{ grid-template-columns: 14px repeat(15, 26px) 14px; gap: 4px; }
+  :host .seat{ width: 26px; height: 26px; font-size: .6rem; }
+}
+
+/* === FIX VISIBILIDAD EN MÓVIL (overflow + scroll horizontal controlado) === */
+@media (max-width: 600px){
+
+  /* Envolvemos el área de butacas para permitir scroll horizontal sin romper layout */
+  :host .panel {
+    overflow-x: auto;          /* permite desplazarse si las butacas no entran */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Contenedor de filas dentro del panel */
+  :host .rows {
+    min-width: 480px;          /* ancho mínimo suficiente para las 15 columnas */
+    margin: 0 auto;
+  }
+
+  /* Ajustes visuales */
+  :host .row {
+    justify-content: center;
+    gap: 5px;
+  }
+
+  /* Ocultamos scrollbar visual, pero se puede scrollear */
+  :host .panel::-webkit-scrollbar {
+    height: 6px;
+  }
+  :host .panel::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+  }
+}
+.logo-link {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.logo-link img {
+  transition: transform 0.2s ease;
+}
+
+.logo-link img:hover {
+  transform: scale(1.05);
+}
+
