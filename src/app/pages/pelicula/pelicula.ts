@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../axios_service/api.service';
+import { GlobalStatusService } from '../axios_service/global-status.service';
 
 interface Horario {
   hora: string;
@@ -9,11 +11,24 @@ interface Horario {
 
 interface Funcion {
   id: number;
-  dia: string;
-  fecha: string;
-  formato: string;
-  idioma: string;
+  estaDisponible: boolean;
+  fecha: Date;
   horarios: Horario[];
+  idioma: string;
+  sala: {
+      nroSala: number;
+      capacidad: number;
+      estaDisponible: boolean;
+  }
+  formato: {
+      nombre: string;
+      precio: number;
+  }
+  disponibilidadButaca: {
+      nroButaca: number
+      estadoDisponibilidadButaca: string ;
+  }[];
+  peliculaId: number; 
 }
 
 interface Pelicula {
@@ -50,74 +65,140 @@ export class PeliculaComponent implements OnInit {
   };
 
   funciones: Funcion[] = [
-    {
-      id: 1,
-      dia: 'LUNES',
-      fecha: '23/09',
-      formato: '2D',
-      idioma: 'Castellano',
-      horarios: [
-        { hora: '14:00', disponible: true },
-        { hora: '17:30', disponible: true },
-        { hora: '20:00', disponible: true },
-        { hora: '22:30', disponible: true },
-      ],
+  {
+    id: 1,
+    estaDisponible: true,
+    fecha: new Date('2025-09-23'),
+    horarios: [
+      { hora: '14:00', disponible: true },
+      { hora: '17:30', disponible: true },
+      { hora: '20:00', disponible: true },
+      { hora: '22:30', disponible: true },
+    ],
+    idioma: 'Castellano',
+    sala: {
+      nroSala: 1,
+      capacidad: 120,
+      estaDisponible: true,
     },
-    {
-      id: 2,
-      dia: 'LUNES',
-      fecha: '23/09',
-      formato: '2D',
-      idioma: 'Subtitulado',
-      horarios: [
-        { hora: '15:00', disponible: true },
-        { hora: '18:00', disponible: true },
-        { hora: '21:00', disponible: false },
-      ],
+    formato: {
+      nombre: '2D',
+      precio: 2500,
     },
-    {
-      id: 3,
-      dia: 'LUNES',
-      fecha: '23/09',
-      formato: '3D',
-      idioma: 'Castellano',
-      horarios: [
-        { hora: '16:00', disponible: true },
-        { hora: '19:00', disponible: true },
-        { hora: '22:00', disponible: true },
-      ],
+    disponibilidadButaca: Array.from({ length: 10 }, (_, i) => ({
+      nroButaca: i + 1,
+      estadoDisponibilidadButaca: i < 2 ? 'Ocupada' : 'Libre',
+    })),
+    peliculaId: 1,
+  },
+  {
+    id: 2,
+    estaDisponible: true,
+    fecha: new Date('2025-09-23'),
+    horarios: [
+      { hora: '15:00', disponible: true },
+      { hora: '18:00', disponible: true },
+      { hora: '21:00', disponible: false },
+    ],
+    idioma: 'Subtitulado',
+    sala: {
+      nroSala: 1,
+      capacidad: 120,
+      estaDisponible: true,
     },
-    {
-      id: 4,
-      dia: 'MARTES',
-      fecha: '24/09',
-      formato: '2D',
-      idioma: 'Castellano',
-      horarios: [
-        { hora: '14:00', disponible: true },
-        { hora: '17:00', disponible: true },
-        { hora: '20:00', disponible: true },
-      ],
+    formato: {
+      nombre: '2D',
+      precio: 2600,
     },
-    {
-      id: 5,
-      dia: 'MARTES',
-      fecha: '24/09',
-      formato: '3D',
-      idioma: 'Subtitulado',
-      horarios: [
-        { hora: '15:30', disponible: true },
-        { hora: '18:30', disponible: true },
-        { hora: '21:30', disponible: true },
-      ],
+    disponibilidadButaca: Array.from({ length: 10 }, (_, i) => ({
+      nroButaca: i + 1,
+      estadoDisponibilidadButaca: i % 3 === 0 ? 'Ocupada' : 'Libre',
+    })),
+    peliculaId: 1,
+  },
+  {
+    id: 3,
+    estaDisponible: false,
+    fecha: new Date('2025-09-23'),
+    horarios: [
+      { hora: '16:00', disponible: true },
+      { hora: '19:00', disponible: true },
+      { hora: '22:00', disponible: true },
+    ],
+    idioma: 'Castellano',
+    sala: {
+      nroSala: 2,
+      capacidad: 150,
+      estaDisponible: false,
     },
-  ];
+    formato: {
+      nombre: '3D',
+      precio: 3000,
+    },
+    disponibilidadButaca: Array.from({ length: 10 }, (_, i) => ({
+      nroButaca: i + 1,
+      estadoDisponibilidadButaca: 'Ocupada',
+    })),
+    peliculaId: 2,
+  },
+  {
+    id: 4,
+    estaDisponible: true,
+    fecha: new Date('2025-09-24'),
+    horarios: [
+      { hora: '14:00', disponible: true },
+      { hora: '17:00', disponible: true },
+      { hora: '20:00', disponible: true },
+    ],
+    idioma: 'Castellano',
+    sala: {
+      nroSala: 3,
+      capacidad: 100,
+      estaDisponible: true,
+    },
+    formato: {
+      nombre: '2D',
+      precio: 2500,
+    },
+    disponibilidadButaca: Array.from({ length: 10 }, (_, i) => ({
+      nroButaca: i + 1,
+      estadoDisponibilidadButaca: i === 5 ? 'Ocupada' : 'Libre',
+    })),
+    peliculaId: 3,
+  },
+  {
+    id: 5,
+    estaDisponible: true,
+    fecha: new Date('2025-09-24'),
+    horarios: [
+      { hora: '15:30', disponible: true },
+      { hora: '18:30', disponible: true },
+      { hora: '21:30', disponible: true },
+    ],
+    idioma: 'Subtitulado',
+    sala: {
+      nroSala: 4,
+      capacidad: 200,
+      estaDisponible: true,
+    },
+    formato: {
+      nombre: '3D',
+      precio: 3100,
+    },
+    disponibilidadButaca: Array.from({ length: 10 }, (_, i) => ({
+      nroButaca: i + 1,
+      estadoDisponibilidadButaca: i % 2 === 0 ? 'Libre' : 'Ocupada',
+    })),
+    peliculaId: 3,
+  },
+];
 
   funcionSeleccionada: Funcion | null = null;
   horarioSeleccionado: string | null = null;
   mostrarModal = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private readonly apiService: ApiService,
+  private readonly globalStatusService: GlobalStatusService) {}
 
   ngOnInit(): void {
     const navigation = this.router.getCurrentNavigation();
@@ -136,6 +217,20 @@ export class PeliculaComponent implements OnInit {
     if (peliculaId) {
       console.log('Película ID desde ruta:', peliculaId);
     }
+    this.initialization()
+  }
+
+async initialization(): Promise<void> {
+    this.globalStatusService.setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 500)); //Decorativo
+    const data = await this.apiService.getFuncionesByPeliculaId(this.pelicula.id);
+    if (data.length === 0) {
+      alert('No hay peliculas para mostrar.');
+      this.globalStatusService.setLoading(false);
+      return;
+    }
+    this.funciones = data;
+    this.globalStatusService.setLoading(false);
   }
 
   seleccionarHorario(funcion: Funcion, hora: string): void {
@@ -162,11 +257,16 @@ export class PeliculaComponent implements OnInit {
     this.router.navigate(['/seleccion-butaca'], {
       state: {
         pelicula: this.pelicula.titulo,
-        fecha: `${this.funcionSeleccionada!.dia} ${this.funcionSeleccionada!.fecha}`,
-        hora: this.horarioSeleccionado,
-        formato: this.funcionSeleccionada!.formato,
-        idioma: this.funcionSeleccionada!.idioma,
+        fecha: this.funcionSeleccionada!.fecha.toLocaleDateString('es-AR'),
+        horarios: this.funcionSeleccionada!.horarios,
+        formato: this.funcionSeleccionada!.formato.nombre,
+        precio: this.funcionSeleccionada!.formato.precio,
+        sala: this.funcionSeleccionada!.sala.nroSala,
+        capacidadSala: this.funcionSeleccionada!.sala.capacidad,
+        estaDisponibleSala: this.funcionSeleccionada!.sala.estaDisponible,
+        disponibilidadButaca: this.funcionSeleccionada!.disponibilidadButaca,
         funcionId: this.funcionSeleccionada!.id,
+        peliculaId: this.funcionSeleccionada!.peliculaId,
       },
     });
   }

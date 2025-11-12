@@ -34,7 +34,7 @@
     <div class="funciones-lista">
       <div *ngFor="let funcion of funciones" class="funcion-card">
         <div class="funcion-header">
-          <h3>{{ funcion.dia }} {{ funcion.fecha }}</h3>
+          <h3>{{ funcion.fecha }} {{ funcion.fecha }}</h3>
           <p class="funcion-detalles">{{ funcion.formato }} - {{ funcion.idioma }}</p>
         </div>
 
@@ -72,7 +72,7 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <h3>Tu selección:</h3>
     <p class="modal-pelicula">{{ pelicula.titulo }}</p>
-    <p class="modal-detalle">{{ funcionSeleccionada?.dia }} {{ funcionSeleccionada?.fecha }} - {{ horarioSeleccionado }}</p>
+    <p class="modal-detalle">{{ funcionSeleccionada?.fecha }} {{ funcionSeleccionada?.fecha }} - {{ horarioSeleccionado }}</p>
     <p class="modal-detalle">{{ funcionSeleccionada?.formato }} - {{ funcionSeleccionada?.idioma }}</p>
 
     <div class="modal-buttons">
