@@ -1,5 +1,3 @@
-import { axiosAPIUsuarios } from "./axios.client";
-
  export const config = {
     APIPeliculasUrls: {
         baseUrl: 'http://localhost:3000',
@@ -8,7 +6,10 @@ import { axiosAPIUsuarios } from "./axios.client";
     },
     APIUsuariosUrls: {
         baseUrl:'http://localhost:3000',
-        getDatosClienteById: (id: number) => `microservicio-usuarios/datos-cliente/${id}`
+        getDatosClienteById: (id: number) => `microservicio-usuarios/datos-cliente/${id}`,
+        refreshToken: 'microservicio-usuarios/refresh-token',
+        register: 'microservicio-usuarios/registro',
+        login: 'microservicio-usuarios/login',
     },
     APIFuncionesUrls: {
         baseUrl:'http://localhost:3000',
