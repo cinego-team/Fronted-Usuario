@@ -7,14 +7,14 @@
   <div class="register-box">
     <h2>¡Unete a CineGo hoy!</h2>
 
-    <form [formGroup]="formulario" (ngSubmit)="onSave()">
-    @if (error) {
-  <div class="alert alert-danger">{{ error }}</div>}
+    <form [formGroup]="formulario" (ngSubmit)="onRegister()">
+    @if (errorMessage) {
+  <div class="alert alert-danger">{{ errorMessage }}</div>}
       
         <div class="form-group">
           <label for="nombre">Nombre/s</label>
-           <input id="name" formControlName="nombre" />
-             @if (formulario.get('name')?.invalid && formulario.get('name')?.touched) {
+           <input id="nombre" formControlName="nombre" />
+             @if (formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched) {
     <small class="text-danger">Nombre requerido (mínimo 2 letras)</small>
   }
         </div>
