@@ -15,40 +15,48 @@ interface RegisterResponse {
   standalone: true,
   templateUrl: './register.html',
   styleUrls: ['./register.css'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class RegisterComponent {
+  formulario: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
-  password: any;
-  email: any;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+    this.formulario = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      apellido: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      contraseña: ['', [Validators.required, Validators.minLength(6)]], // cami este cambia
+    });
+  }
 
   onRegister() {
-    const email = this.email;
-    const password = this.password;
-    console.log('Email:', email);
-    console.log('Password:', password);
-    this.authService.register({ email, password }).then(() => {
-      this.successMessage = 'Registro exitoso. Redirigiendo...';
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 1500);
-    }).catch(err => {
-      if (err.status === 409) {
-        this.errorMessage = 'El correo ya está registrado.';
-      } else if (err.error && err.error.message) {
-        this.errorMessage = err.error.message;
-      } else {
-        this.errorMessage = 'Error inesperado. Intenta más tarde.';
-      }
+    if (this.formulario.invalid) {
+      this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      this.formulario.markAllAsTouched();
+      return;
     }
-    )
-  };
+    const email = this.formulario.value.email;
+    const contraseña = this.formulario.value.contraseña;
+    console.log('Email:', email);
+    console.log('Contraseña:', contraseña);
+    this.authService
+      .register({ email, password: contraseña })
+      .then(() => {
+        this.successMessage = 'Registro exitoso. Redirigiendo...';
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
+      })
+      .catch((err) => {
+        if (err.status === 409) {
+          this.errorMessage = 'El correo ya está registrado.';
+        } else if (err.error && err.error.message) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = 'Error inesperado. Intenta más tarde.';
+        }
+      });
+  }
 }
-
