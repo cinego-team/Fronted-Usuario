@@ -1,15 +1,14 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <div class="login-container">
-  <!-- Logo superior -->
   <header class="topbar">
     <img src="/assets/logo.png" alt="CineGo" class="logo" />
   </header>
 
-  <!-- Caja del login -->
   <div class="login-box">
     <h2>¡BIENVENIDO!</h2>
 
-    <form>
-      <form [formGroup]="formulario" (ngSubmit)="OnLogin()"></form>
+    <form [formGroup]="formulario" (ngSubmit)="OnLogin()">
       <label for="usuario">Usuario (Email)</label>
       <input type="email" id="usuario" formControlName="email" />
 
@@ -18,13 +17,19 @@
       }
 
       <label for="password">Contraseña</label>
-      <input type="password" id="password" formControlName="contraseña" />
+      <input type="password" id="password" formControlName="password" />
 
       <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
       <div class="actions">
-        <button type="button" class="btn-login" (click)="OnLogin()">INICIAR SESIÓN</button>
+        <button type="submit" class="btn-login">INICIAR SESIÓN</button>
       </div>
+
+      <div
+        class="g-recaptcha"
+        data-sitekey="6LcICREsAAAAAKHWBF39boQk9uCQ__y6iFi7mbb2"
+        data-callback="onCaptchaSuccess"
+      ></div>
 
       <p class="register-text">
         ¿Aún no tienes cuenta?
