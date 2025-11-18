@@ -1,62 +1,82 @@
 <header class="topbar">
     <img src="/assets/logo.png" alt="CineGo" class="logo" />
     <div class="user-section">
-      <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
-      <span>Usuario</span>
     </div>
   </header>
 <div class="register-container">
   <div class="register-box">
     <h2>¡Unete a CineGo hoy!</h2>
 
-    <form>
-      <div class="form-row">
+    <form [formGroup]="formulario" (ngSubmit)="onSave()">
+    @if (error) {
+  <div class="alert alert-danger">{{ error }}</div>}
+      
         <div class="form-group">
           <label for="nombre">Nombre/s</label>
-          <input type="text" id="nombre" name="nombre" />
+           <input id="name" formControlName="nombre" />
+             @if (formulario.get('name')?.invalid && formulario.get('name')?.touched) {
+    <small class="text-danger">Nombre requerido (mínimo 2 letras)</small>
+  }
         </div>
         <div class="form-group">
           <label for="apellido">Apellido/s</label>
-          <input type="text" id="apellido" name="apellido" />
-        </div>
+            <input id="apellido" formControlName="apellido" />
+             @if (formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched) {
+    <small class="text-danger">Apellido requerido (mínimo 3 letras)</small>
+  }
       </div>
 
-      <div class="form-row">
+   
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" />
+           <label for="email">Email</label>
+  <input id="email" type="email" formControlName="email" />
+
+  @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
+    <small class="text-danger">
+      Ingresá un email válido (ej: usuario@correo.com)
+    </small>
+  }
         </div>
         <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" />
+           <label for="contraseña">Contraseña</label>
+  <input id="contraseña" type="password" formControlName="contraseña" />
+
+  @if (formulario.get('contraseña')?.invalid && formulario.get('contraseña')?.touched) {
+    <small class="text-danger">
+      Ingresá una contraseña válida (ACA CAMI PONE LOS REQUERIMIENTOS)
+    </small>
+  }
         </div>
       </div>
 
       <div class="form-group full">
-        <label>Fecha Nacimiento</label>
-        <div class="date-row">
-          <select>
-            <option>Día</option>
-          </select>
-          <select>
-            <option>Mes</option>
-          </select>
-          <select>
-            <option>Año</option>
-          </select>
-        </div>
-      </div>
+  <label>Fecha Nacimiento</label>
+  <div class="date-row">
+    <select formControlName="dia">
+      <option value="">Día</option>
+      <option *ngFor="let d of dias" [value]="d">{{ d }}</option>
+    </select>
 
+    <select formControlName="mes">
+      <option value="">Mes</option>
+      <option *ngFor="let m of meses" [value]="m.value">{{ m.label }}</option>
+    </select>
+
+    <select formControlName="anio">
+      <option value="">Año</option>
+      <option *ngFor="let a of anios" [value]="a">{{ a }}</option>
+    </select>
+  </div>
+</div>
       <div class="form-group full">
-        <label>Número de teléfono</label>
-        <div class="phone-row">
-          <select>
-            <option>+54</option>
-          </select>
-          <input type="tel" placeholder="Número" />
-        </div>
-      </div>
-
+  <label>Número de teléfono</label>
+  <div class="phone-row">
+    <select disabled>
+      <option>+54</option>
+    </select>
+    <input type="tel" formControlName="telefono" placeholder="Número" />
+  </div>
+</div>
       <button type="submit" class="btn-register" (click)="onRegister()">REGISTRARSE</button>
     </form>
   </div>
