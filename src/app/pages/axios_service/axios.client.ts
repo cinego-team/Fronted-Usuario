@@ -42,24 +42,22 @@ axiosAPIPeliculas.interceptors.request.use((config) => {
 });
 
 export const axiosAPIFunciones = axios.create({
-    baseURL: config.APIFuncionesUrls.baseUrl,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+  baseURL: config.APIFuncionesUrls.baseUrl,  // http://localhost:3000
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 axiosAPIFunciones.interceptors.request.use((config) => {
-    const token = localStorage.getItem('access_token');
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (token) {
-        config.headers.Authorization = token;
-    }
-    if (refreshToken) {
-        config.headers['refresh-token'] = refreshToken;
-    }
+  const token = localStorage.getItem('access_token');
+  const refreshToken = localStorage.getItem('refresh_token');
 
-    return config;
+  if (token) config.headers.Authorization = token;
+  if (refreshToken) config.headers['refresh-token'] = refreshToken;
+
+  return config;
 });
+
 
 export const axiosAuthService = axios.create({
   baseURL: config.APIUsuariosUrls.baseUrl,

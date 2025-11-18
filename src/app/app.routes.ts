@@ -14,6 +14,7 @@ export const routes: Routes = [
   { path: 'pelicula/:id', component: PeliculaComponent },
   { path: 'seleccion-butaca', component: SeleccionButacaComponent },
   { path: 'resumen-seleccion', component: ResumenSeleccionComponent },
+  { path: 'seleccion-butaca/:idFuncion', component: SeleccionButacaComponent },
   {path: 'notificaciondeenvio', component: notificaciondeenvioComponent}
 ];
 
