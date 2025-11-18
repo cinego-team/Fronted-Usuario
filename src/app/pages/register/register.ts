@@ -27,7 +27,12 @@ export class RegisterComponent {
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       apellido: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      contraseña: ['', [Validators.required, Validators.minLength(6)]], // cami este cambia
+      contraseña: ['', [
+        Validators.required,
+        Validators.pattern(/^\S.*\S$/), // sin espacios al inicio o final
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/)
+        // 1 mayúscula, 1 número, 1 caracter especial, 8 caracteres mínimo
+      ]],
     });
   }
 

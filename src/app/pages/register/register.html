@@ -43,7 +43,14 @@
 
   @if (formulario.get('contraseña')?.invalid && formulario.get('contraseña')?.touched) {
     <small class="text-danger">
-      Ingresá una contraseña válida (ACA CAMI PONE LOS REQUERIMIENTOS)
+      La contraseña debe cumplir con:
+        <ul class="mt-1 text-danger">
+            <li>Mínimo 8 caracteres</li>
+            <li>Al menos una letra mayúscula (A–Z)</li>
+            <li>Al menos un número (0–9)</li>
+            <li>Al menos un carácter especial (!, @, #, $, %, etc.)</li>
+            <li>Sin espacios al inicio ni al final</li>
+        </ul>
     </small>
   }
         </div>
