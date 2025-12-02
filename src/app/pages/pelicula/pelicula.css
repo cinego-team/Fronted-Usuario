@@ -1,4 +1,4 @@
-/* ======= CONTENEDOR GENERAL ======= */
+/*  CONTENEDOR GENERAL  */
 .funcion-container {
   min-height: 100vh;
   /* ⚠️ Quitamos el min-width y los 100vh forzados que rompían móvil */
@@ -10,7 +10,7 @@
   overflow-x: hidden;           /* evita scroll horizontal */
 }
 
-/* ======= HEADER ======= */
+/*  HEADER  */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -30,8 +30,8 @@
   .user-icon { height: 80px; }
 }
 
-/* ======= BLOQUE CON POSTER + DETALLES + SINOPSIS ======= */
-/* Base móvil: todo apilado */
+/* BLOQUE CON POSTER + DETALLES + SINOPSIS */
+
 .pelicula-info{
   display: grid;
   gap: 1rem;
@@ -100,8 +100,7 @@
 .sinopsis-box h3{ font-size: 1.1rem; margin: 0 0 .6rem; }
 .sinopsis-box p{ font-size: .95rem; line-height: 1.5; }
 
-/* ======= FUNCIONES DISPONIBLES ======= */
-/* Contenedor normal (dejamos que la página scrollee, sin "flex:1" obligatorio) */
+/* FUNCIONES DISPONIBLES*/
 .funciones-scroll{
   padding: 1rem 1rem 0;
 }
@@ -150,7 +149,7 @@
   .horario-btn{ flex: 1 1 calc(50% - .6rem); text-align: center; }
 }
 
-/* ======= FOOTER DE ACCIONES ======= */
+/* FOOTER DE ACCIONES */
 .footer-actions{
   display: flex; gap: 1rem;
   padding: 1rem;
@@ -168,7 +167,7 @@
 .btn-continuar:hover:not(:disabled){ background:#a04545; transform: translateY(-1px); }
 .btn-continuar:disabled{ background:#6b2424; opacity:.6; cursor:not-allowed; }
 
-/* ======= MODAL ======= */
+/* MODAL */
 .modal-overlay{
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,.7);
@@ -190,7 +189,7 @@
 }
 .modal-buttons button:hover{ transform: scale(1.05); }
 
-/* ======= SANIDAD LOCAL ======= */
+/*SANIDAD LOCAL*/
 :host{ display:block; overflow-x:hidden; }
 
 

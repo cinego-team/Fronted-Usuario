@@ -1,4 +1,4 @@
-/* ===== Fondo general ===== */
+/* Fondo general */
 .login-container {
   background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
   min-height: 100vh;
@@ -11,7 +11,7 @@
   position: relative;
 }
 
-/* ===== Topbar con logo ===== */
+/* Topbar con logo */
 .topbar {
   position: absolute;
   top: 0;
@@ -32,7 +32,7 @@
   }
 }
 
-/* ===== Caja del login ===== */
+/* Caja del login */
 .login-box {
   background-color: #8a1009;
   padding: 2rem;
@@ -44,14 +44,12 @@
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== Título ===== */
 .login-box h2 {
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
   font-weight: bold;
 }
 
-/* ===== Labels ===== */
 .login-box label {
   display: block;
   text-align: left;
@@ -59,7 +57,6 @@
   font-size: 0.95rem;
 }
 
-/* ===== Inputs ===== */
 .login-box input {
   width: 100%;
   padding: 0.6rem;
@@ -71,7 +68,7 @@
   outline: none;
 }
 
-/* ===== Enlace "¿Olvidaste tu contraseña?" ===== */
+/* Enlace "¿Olvidaste tu contraseña?" */
 .forgot-password {
   display: block;
   text-align: left;
@@ -82,7 +79,7 @@
   cursor: pointer;
 }
 
-/* ===== Botón de inicio de sesión ===== */
+/* Botón de inicio de sesión */
 .btn-login {
   background-color: #ebccc7;
   color: #8a1009;
@@ -98,7 +95,6 @@
   background-color: #fff;
 }
 
-/* ===== Texto de registro ===== */
 .register-text {
   margin-top: 1.2rem;
   font-size: 0.9rem;
@@ -109,7 +105,7 @@
   font-weight: bold;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 768px) {
   .login-box {
     width: 100%;

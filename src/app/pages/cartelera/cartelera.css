@@ -1,4 +1,4 @@
-/* ===== Fondo general de la pantalla ===== */
+/*Fondo general de la pantalla*/
 .container {
   min-height: 100vh;
   /* ⚠️ Quitamos el min-width que rompía el móvil */
@@ -8,7 +8,6 @@
   overflow-x: hidden; /* evita scroll lateral en móvil */
 }
 
-/* ===== Header / Topbar ===== */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -33,7 +32,6 @@
   .user-icon { height: 80px; }
 }
 
-/* ===== Título ===== */
 .titulo-cartelera {
   text-align: center;
   color: #fff;
@@ -44,7 +42,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
 }
 
-/* ===== GRID RESPONSIVE (estilo SudCinemas) =====
+/* GRID RESPONSIVE (estilo SudCinemas)
    - móvil: 1 col
    - >=600px: 2 col
    - >=900px: 3 col
@@ -70,15 +68,12 @@
   .peliculas-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
 }
 
-/* ===== CARD ===== */
 .pelicula-card {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.3);
   border: 3px solid #8a1009;
   border-radius: 15px;
   overflow: hidden;
-  /* ⚠️ Estas dos líneas hacían que la card no se adaptara.
-     Las reemplazamos por ancho completo del grid cell. */
   width: 100%;
   max-width: none;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
@@ -93,7 +88,6 @@
   }
 }
 
-/* ===== POSTER (ratio 2:3, sin deformación) ===== */
 .poster-container {
   width: 100%;
   aspect-ratio: 2 / 3;
@@ -101,7 +95,6 @@
   border: 4px solid #8a1009;
   border-radius: 10px;
   overflow: hidden;
-  /* quitamos márgenes/width calc: que llene la card */
   margin: 10px;
 }
 
@@ -112,7 +105,6 @@
   display: block;
 }
 
-/* ===== Textos ===== */
 .pelicula-info {
   padding: 12px 14px 18px;
   text-align: center;
@@ -132,7 +124,7 @@
   line-height: 1.4;
 }
 
-/* ===== Ajustes para pantallas chicas ===== */
+/* Ajustes para pantallas chicas */
 @media (max-width: 575.98px){
   .topbar { padding: .6rem .75rem; }
   .peliculas-grid { padding: .75rem; gap: 1rem; }

@@ -6,16 +6,16 @@
   overflow-x: hidden; /* no scroll lateral */
 }
 
-/* ===== CONTENEDOR ===== */
+/* CONTENEDOR */
 .wrapper { max-width: 1200px; margin: 0 auto; padding: 16px; }
 
-/* ===== TOPBAR ===== */
+/* TOPBAR */
 .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
 .logo { height: 70px; }
 .user-icon { height: 70px; }
 .user-section { display:flex; flex-direction:column; align-items:center; color:#f8d8c4; font-size:14px; }
 
-/* ===== LAYOUT PRINCIPAL ===== */
+/* LAYOUT PRINCIPAL*/
 .main-container {
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@
 .summary-item { display:flex; justify-content:space-between; font-weight:600; color:#f8d8c4; }
 .summary-item.total { border-top:1px solid rgba(255,255,255,.3); padding-top:10px; font-size:1.2rem; color:#fff; }
 
-/* ===== PANTALLA ===== */
+/* PANTALLA */
 .screen {
   text-align:center;
   background: linear-gradient(#8b4d4d,#c36b6b);
@@ -64,7 +64,7 @@
   padding: 6px 0;
 }
 
-/* ===== FILAS Y ASIENTOS (DESKTOP) ===== */
+/* FILAS Y ASIENTOS (DESKTOP)*/
 .rows { display:flex; flex-direction:column; gap:10px; margin:10px auto 16px; width: 100%; align-items:center; }
 
 /* Desktop: 15 asientos por fila + etiquetas */
@@ -115,7 +115,7 @@
 .btn:disabled{ opacity:.5; cursor:not-allowed; }
 .btn.ghost { background:#ebccc7; }
 
-/* ===== TABLET ===== */
+/* TABLET */
 @media (max-width: 1024px){
   .main-container { flex-wrap: wrap; gap: 24px; justify-content: center; }
   .summary-panel { margin-top: 0; width: 100%; max-width: 420px; }
@@ -123,7 +123,7 @@
   .row { grid-template-columns: 24px repeat(12, 1fr) 24px; }
 }
 
-/* ===== MÓVIL (mejora estética fuerte) ===== */
+/* MÓVIL (mejora estética fuerte)  */
 @media (max-width: 600px){
   .wrapper { padding: 12px; }
   .panel { padding: 14px 10px; border-radius:16px; }
@@ -148,7 +148,7 @@
   .btn { flex: 1 1 100%; }                /* botones a ancho completo */
 }
 
-/* ===== MÓVIL MUY CHICO (≤360px) ===== */
+/*  MÓVIL MUY CHICO  */
 @media (max-width: 360px){
   .row {
     grid-template-columns: 16px repeat(8, 30px) 16px;
@@ -157,7 +157,7 @@
   .seat { width: 30px; height: 30px; font-size: .62rem; }
 }
 
-/* ===== OVERRIDES MÓVIL – NO rompen desktop ===== */
+/* OVERRIDES MÓVIL   */
 @media (max-width: 600px){
 
   /* Más aire general y panel más compacto */
@@ -203,13 +203,13 @@
   :host .btn{ flex: 1 1 100%; min-height: 44px; }
 }
 
-/* MÓVIL MUY CHICO – aún más compacto sin romper layout */
+/* MÓVIL MUY CHICO */
 @media (max-width: 360px){
   :host .row{ grid-template-columns: 14px repeat(15, 26px) 14px; gap: 4px; }
   :host .seat{ width: 26px; height: 26px; font-size: .6rem; }
 }
 
-/* === FIX VISIBILIDAD EN MÓVIL (overflow + scroll horizontal controlado) === */
+/* FIX VISIBILIDAD EN MÓVIL */
 @media (max-width: 600px){
 
   /* Envolvemos el área de butacas para permitir scroll horizontal sin romper layout */
@@ -224,13 +224,11 @@
     margin: 0 auto;
   }
 
-  /* Ajustes visuales */
   :host .row {
     justify-content: center;
     gap: 5px;
   }
 
-  /* Ocultamos scrollbar visual, pero se puede scrollear */
   :host .panel::-webkit-scrollbar {
     height: 6px;
   }
