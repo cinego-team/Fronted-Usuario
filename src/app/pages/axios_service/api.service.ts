@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { axiosAPIPeliculas, axiosAPIFunciones}  from './axios.client';
 import { config } from './env';
-import axios from 'axios';
 
 @Injectable({
     providedIn: 'root',
 })
+
 export class ApiService {
     constructor() { }
 

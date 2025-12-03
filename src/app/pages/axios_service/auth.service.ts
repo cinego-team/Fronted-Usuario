@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs'; // <-- ¡Añade BehaviorSubject aquí!
-import { Router } from '@angular/router'; // <-- ¡Añade Router aquí!
-
+import { Observable, BehaviorSubject } from 'rxjs'; 
+import { Router } from '@angular/router'; 
 import { axiosAuthService } from './axios.client';
 import { config } from './env';
 
 @Injectable({
     providedIn: 'root',
 })
+
 export class AuthService {
     private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 

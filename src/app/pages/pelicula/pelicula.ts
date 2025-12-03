@@ -50,6 +50,7 @@ interface Pelicula {
   templateUrl: './pelicula.html',
   styleUrls: ['./pelicula.css'],
 })
+
 export class PeliculaComponent implements OnInit {
   pelicula: Pelicula = {
     id: 1,
@@ -208,11 +209,9 @@ export class PeliculaComponent implements OnInit {
         this.pelicula = peliculaData;
       }
     }
-
     if (window.history.state && window.history.state.pelicula) {
       this.pelicula = window.history.state.pelicula;
     }
-
     const peliculaId = this.route.snapshot.paramMap.get('id');
     if (peliculaId) {
       console.log('Película ID desde ruta:', peliculaId);
@@ -252,8 +251,6 @@ async initialization(): Promise<void> {
 
   confirmarCompra(): void {
     this.mostrarModal = false;
-
-    // Pasar todos los datos a la siguiente pantalla
     this.router.navigate(['/seleccion-butaca'], {
       state: {
         pelicula: this.pelicula.titulo,

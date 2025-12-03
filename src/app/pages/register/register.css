@@ -1,4 +1,3 @@
-/* Fondo general  */
 .register-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
@@ -10,7 +9,6 @@
   overflow-x: hidden;
 }
 
-/* Header / Topbar */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -25,20 +23,17 @@
   box-sizing: border-box;
 }
 
-/* Ajuste fino del logo */
 .logo {
   height: 65px;
   object-fit: contain;
-  margin-top: 5px;  /* 🔹 le da un pequeño margen para alinear mejor */
+  margin-top: 5px; 
 }
 
-/* Icono de usuario (a la derecha) */
 .user-icon {
   height: 65px;
   margin-right: 4px;
 }
 
-/* Contenedor del usuario (ícono + texto) */
 .user-section {
   display: flex;
   align-items: center;
@@ -49,7 +44,6 @@
   font-weight: 500;
 }
 
-/* Caja de registro  */
 .register-box {
   background-color: #8b0f0f;
   padding: 2rem;
@@ -59,17 +53,15 @@
   color: #fff;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
   text-align: center;
-  margin-top: 100px; /* deja espacio para el logo */
+  margin-top: 100px; 
 }
 
-/* Título */
 .register-box h2 {
   margin-bottom: 1.5rem;
   font-size: clamp(1.4rem, 4vw, 1.8rem);
   font-weight: bold;
 }
 
-/* Grupos de formulario  */
 .form-row {
   display: flex;
   justify-content: space-between;
@@ -89,16 +81,13 @@
   text-align: left;
 }
 
-/* Labels*/
 .form-group label {
   display: block;
   margin-bottom: 0.3rem;
   font-size: 0.95rem;
 }
 
-/* Inputs y Selects */
-input,
-select {
+input,select {
   width: 100%;
   padding: 0.6rem;
   border-radius: 20px;
@@ -114,19 +103,15 @@ input::placeholder {
   color: #4a1a1a;
 }
 
-/* Filas especiales */
-.date-row,
-.phone-row {
+.date-row,.phone-row {
   display: flex;
   gap: 0.5rem;
 }
 
-.date-row select,
-.phone-row select {
+.date-row select,.phone-row select {
   width: 33%;
 }
 
-/* Botón  */
 .btn-register {
   background-color: #f5c5c5;
   color: #8b0f0f;
@@ -145,7 +130,6 @@ input::placeholder {
   transform: scale(1.03);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .register-box {
     width: 100%;

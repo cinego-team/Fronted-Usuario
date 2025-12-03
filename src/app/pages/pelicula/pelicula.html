@@ -1,14 +1,12 @@
 <div class="funcion-container">
   <header class="topbar">
     <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
-
     <div class="user-section">
       <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
       <span>Usuario</span>
     </div>
   </header>
 
-  <!-- Información de la película -->
   <div class="pelicula-info">
     <div class="poster">
       <img [src]="pelicula.poster" [alt]="pelicula.titulo" loading="lazy" />
@@ -27,7 +25,6 @@
     </div>
   </div>
 
-  <!-- Lista scrolleable de funciones -->
   <div class="funciones-scroll">
     <h2>Funciones Disponibles</h2>
 
@@ -54,7 +51,6 @@
     </div>
   </div>
 
-  <!-- Botones -->
   <div class="footer-actions">
     <button class="btn-volver" (click)="volver()">Volver</button>
     <button
@@ -67,7 +63,6 @@
   </div>
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" *ngIf="mostrarModal" (click)="cancelarModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <h3>Tu selección:</h3>

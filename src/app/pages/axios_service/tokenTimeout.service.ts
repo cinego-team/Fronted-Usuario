@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: 'root' })
+
 export class TokenTimeoutService {
     private timeoutRef!: ReturnType<typeof setTimeout>;
     private timeoutMs = 15 * 60 * 1000; // 15 minutos, duracion del token

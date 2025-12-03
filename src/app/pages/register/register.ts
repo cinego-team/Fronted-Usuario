@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../axios_service/auth.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,6 +16,7 @@ interface RegisterResponse {
   styleUrls: ['./register.css'],
   imports: [CommonModule, ReactiveFormsModule],
 })
+
 export class RegisterComponent {
   formulario: FormGroup;
   errorMessage: string | null = null;
@@ -42,7 +42,9 @@ export class RegisterComponent {
     console.log('Email:', email);
     console.log('Contraseña:', contraseña);
     this.authService
-      .register({ email, password: contraseña })
+      .register({
+        email, password: contraseña, captcha: ''
+      })
       .then(() => {
         this.successMessage = 'Registro exitoso. Redirigiendo...';
         setTimeout(() => {

@@ -1,11 +1,9 @@
-/*Fondo general de la pantalla*/
 .container {
   min-height: 100vh;
-  /* ⚠️ Quitamos el min-width que rompía el móvil */
   background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* evita scroll lateral en móvil */
+  overflow-x: hidden; 
 }
 
 .topbar {
@@ -17,7 +15,9 @@
 }
 
 .logo { height: 56px; object-fit: contain; }
+
 .user-icon { height: 40px; }
+
 .user-section {
   display: flex;
   align-items: center;
@@ -26,7 +26,6 @@
   font-size: 14px;
 }
 
-/* Ajustes para desktop grande */
 @media (min-width: 992px){
   .logo { height: 80px; }
   .user-icon { height: 80px; }
@@ -48,11 +47,11 @@
    - >=900px: 3 col
    - >=1200px: 4 col
 */
+
 .peliculas-grid {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: 1fr;
-  /* centrado y respiración lateral */
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
@@ -79,7 +78,6 @@
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
-/* Hover sólo en pantallas grandes */
 @media (hover: hover) and (min-width: 992px){
   .pelicula-card:hover {
     transform: translateY(-8px) scale(1.03);
@@ -124,14 +122,12 @@
   line-height: 1.4;
 }
 
-/* Ajustes para pantallas chicas */
 @media (max-width: 575.98px){
   .topbar { padding: .6rem .75rem; }
   .peliculas-grid { padding: .75rem; gap: 1rem; }
   .poster-container { margin: 8px; }
 }
 
-/* Evitar que estilos globales ajenos afecten esta página */
 :host { display: block; overflow-x: hidden; }
 
 .logo-link {
