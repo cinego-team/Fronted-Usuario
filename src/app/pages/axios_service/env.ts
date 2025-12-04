@@ -16,10 +16,21 @@ export const config = {
 
     APIFuncionesUrls: {
         baseUrl: 'http://localhost:3000',
-        findAllByPeliculaId: (id: number) => `microservicio-funciones-y-salas/funciones-por-pelicula/pelicula/${id}`,
-        findAllDisponibilidadByFuncionId: (id: number) => `microservicio-funciones-y-salas/butaca-por-funcion/disponibilidad/${id}`
+
+        findAllByPeliculaId: (id: number) =>
+            `microservicio-funciones-y-salas/funciones-por-pelicula/pelicula/${id}`,
+
+        findAllDisponibilidadByFuncionId: (id: number) =>
+            `microservicio-funciones-y-salas/butaca-por-funcion/disponibilidad/${id}`,
+
+        getFuncionById: (id: number) =>
+            `microservicio-funciones-y-salas/funciones/${id}`,
     },
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
     APIVentasUrls: {
         baseUrl: 'http://localhost:3000',
         crearVenta: 'microservicio-ventas/crear-venta', //cambiar

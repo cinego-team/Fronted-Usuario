@@ -1,19 +1,20 @@
 <header class="topbar">
-    <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
-    <div class="user-section">
-      <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
-      <span>Usuario</span>
-    </div>
-  </header>
+  <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
+  <div class="user-section">
+    <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
+    <span>Usuario</span>
+  </div>
+</header>
+
 <div class="wrapper">
   <main class="panel">
     <div class="summary-card">
       <div class="summary-cols">
         <div class="col left">
           <h3>Tu selección:</h3>
-          <p>Película X</p>
-          <p>Día - XX/XX</p>
-          <p>Formato - XXXXX</p>
+          <p>{{ pelicula }}</p>
+          <p>Día - {{ fecha }}</p>
+          <p>Formato - {{ formato }}</p>
         </div>
 
         <div class="col right">
@@ -24,14 +25,17 @@
           <ng-template #noSeats>
             <em>No seleccionaste butacas.</em>
           </ng-template>
-          <p>Total - $</p>
+          <p>Total - ${{ total() }}</p>
         </div>
       </div>
 
       <div class="summary-actions">
         <button class="btn ghost" (click)="cancelar()">Cancelar</button>
-        <button class="btn" [disabled]="!asientos.length" (click)="pagar()">Pagar</button>
+        <button class="btn" [disabled]="!asientos.length" (click)="pagar()">
+          Pagar
+        </button>
       </div>
     </div>
   </main>
 </div>
+

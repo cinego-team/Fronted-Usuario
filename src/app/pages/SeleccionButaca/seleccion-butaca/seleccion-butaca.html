@@ -8,7 +8,6 @@
 
 <div class="wrapper">
   <div class="main-container">
-    
     <!-- Panel Izquierdo: Butacas -->
     <main class="panel">
       <div class="screen">PANTALLA</div>
@@ -19,10 +18,11 @@
           <button
             *ngFor="let s of byRow(r); trackBy: trackBySeat"
             class="seat"
-            [class.selected]="s.status === 'selected'"
-            [class.occupied]="s.status === 'occupied'"
-            [disabled]="s.status === 'occupied'"
-            (click)="toggle(s)">
+            [class.selected]="s.status === 'seleccionada'"
+            [class.occupied]="s.status === 'ocupada'"
+            [disabled]="s.status === 'ocupada'"
+            (click)="toggle(s)"
+          >
             {{ s.id }}
           </button>
           <div class="row-label">{{ r }}</div>
@@ -35,10 +35,16 @@
         <span><span class="dot occupied"></span> Ocupada</span>
         <span class="count">Elegidas: {{ totalSelectedCount() }}</span>
       </div>
-      
+
       <div class="actions">
         <button class="btn ghost" (click)="cancelar()">Cancelar</button>
-        <button class="btn" [disabled]="totalSelectedCount() === 0" (click)="continuar()">Continuar</button>
+        <button
+          class="btn"
+          [disabled]="totalSelectedCount() === 0"
+          (click)="continuar()"
+        >
+          Continuar
+        </button>
       </div>
     </main>
 
@@ -60,7 +66,5 @@
         </div>
       </div>
     </aside>
-
   </div>
 </div>
-
