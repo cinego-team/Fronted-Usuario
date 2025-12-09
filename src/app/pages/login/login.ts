@@ -18,6 +18,7 @@ export class LoginComponent {
     errorMessage: string | null = null;
     successMessage: string | null = null;
     captchaToken: string | null = null;
+    mostrarPassword = false;
 
     constructor(
         private authService: AuthService,
@@ -32,6 +33,11 @@ export class LoginComponent {
     }
 
     ngOnInit() {
+        (window as any).onCaptchaSuccess = (token: string) => {
+            const event = new CustomEvent("captcha-success", { detail: token });
+            window.dispatchEvent(event);
+        };
+
         window.addEventListener("captcha-success", (e: any) => {
             this.captchaToken = e.detail;
         });
@@ -39,7 +45,7 @@ export class LoginComponent {
 
     OnLogin() {
         if (this.formulario.invalid) {
-            this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+            alert('Por favor, completa todos los campos correctamente.');
             this.formulario.markAllAsTouched();
             return;
         }
@@ -48,7 +54,10 @@ export class LoginComponent {
             return;
         }
         this.authService
-            .login({ email: this.formulario.value.email, password: this.formulario.value.password, captcha: this.captchaToken })
+            .login({
+                email: this.formulario.value.email,
+                password: this.formulario.value.password
+            }, this.captchaToken)
             .then(() => {
                 this.tokenTimeoutService.startCountdown();
                 this.router.navigate(['/cartelera']);

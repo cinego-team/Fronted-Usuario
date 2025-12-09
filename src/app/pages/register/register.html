@@ -1,7 +1,8 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <header class="topbar">
-    <img src="/assets/logo.png" alt="CineGo" class="logo" />
-    <div class="user-section">
-    </div>
+  <img src="/assets/logo.png" alt="CineGo" class="logo" />
+  <div class="user-section"></div>
 </header>
 
 <div class="register-container">
@@ -9,83 +10,100 @@
     <h2>¡Unete a CineGo hoy!</h2>
 
     <form [formGroup]="formulario" (ngSubmit)="onRegister()">
-    @if (errorMessage) {
-  <div class="alert alert-danger">{{ errorMessage }}</div>}
-      
-        <div class="form-group">
-          <label for="nombre">Nombre/s</label>
-           <input id="nombre" formControlName="nombre" />
-             @if (formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched) {
-    <small class="text-danger">Nombre requerido (mínimo 2 letras)</small>
-  }
-        </div>
-        <div class="form-group">
-          <label for="apellido">Apellido/s</label>
-            <input id="apellido" formControlName="apellido" />
-             @if (formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched) {
-    <small class="text-danger">Apellido requerido (mínimo 3 letras)</small>
-  }
+      @if (errorMessage) {
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+      }
+
+      <div class="form-group">
+        <label for="nombre">Nombre/s</label>
+        <input id="nombre" formControlName="nombre" />
+        @if (formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched) {
+        <small class="text-danger">Nombre requerido (mínimo 2 letras)</small>
+        }
+      </div>
+      <div class="form-group">
+        <label for="apellido">Apellido/s</label>
+        <input id="apellido" formControlName="apellido" />
+        @if (formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched) {
+        <small class="text-danger">Apellido requerido (mínimo 3 letras)</small>
+        }
       </div>
 
-   
-        <div class="form-group">
-           <label for="email">Email</label>
-  <input id="email" type="email" formControlName="email" />
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
 
-  @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
-    <small class="text-danger">
-      Ingresá un email válido (ej: usuario@correo.com)
-    </small>
-  }
+        @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
+        <small class="text-danger"> Ingresá un email válido (ej: usuario@correo.com) </small>
+        }
+      </div>
+      <div class="form-group password-wrapper">
+        <label for="contraseña">Contraseña</label>
+        <div class="password-input">
+          <input
+            id="contrasena"
+            [type]="mostrarPassword ? 'text' : 'password'"
+            formControlName="contrasena"
+          />
+
+          <button type="button" class="toggle-btn" (click)="mostrarPassword = !mostrarPassword">
+            <img *ngIf="!mostrarPassword" src="../assets/eye-closed.svg" alt="Mostrar" />
+            <img *ngIf="mostrarPassword" src="../assets/eye-open.svg" alt="Ocultar" />
+          </button>
         </div>
-        <div class="form-group">
-           <label for="contraseña">Contraseña</label>
-  <input id="contraseña" type="password" formControlName="contraseña" />
 
-  @if (formulario.get('contraseña')?.invalid && formulario.get('contraseña')?.touched) {
-    <small class="text-danger">
-      La contraseña debe cumplir con:
-        <ul class="mt-1 text-danger">
+        @if (formulario.get('contrasena')?.invalid && formulario.get('contrasena')?.touched) {
+        <small class="text-danger">
+          La contraseña debe cumplir con:
+          <ul class="mt-1 text-danger">
             <li>Mínimo 8 caracteres</li>
             <li>Al menos una letra mayúscula (A–Z)</li>
             <li>Al menos un número (0–9)</li>
             <li>Al menos un carácter especial (!, @, #, $, %, etc.)</li>
             <li>Sin espacios al inicio ni al final</li>
-        </ul>
-    </small>
-  }
-        </div>
+          </ul>
+        </small>
+        }
       </div>
 
       <div class="form-group full">
-  <label>Fecha Nacimiento</label>
-  <div class="date-row">
-    <select formControlName="dia">
-      <option value="">Día</option>
-      <option *ngFor="let d of dias" [value]="d">{{ d }}</option>
-    </select>
+        <label>Fecha Nacimiento</label>
+        <div class="date-row">
+          <select formControlName="dia">
+            <option value="">Día</option>
+            <option *ngFor="let d of dias" [value]="d">{{ d }}</option>
+          </select>
 
-    <select formControlName="mes">
-      <option value="">Mes</option>
-      <option *ngFor="let m of meses" [value]="m.value">{{ m.label }}</option>
-    </select>
+          <select formControlName="mes">
+            <option value="">Mes</option>
+            <option *ngFor="let m of meses" [value]="m.value">{{ m.label }}</option>
+          </select>
 
-    <select formControlName="anio">
-      <option value="">Año</option>
-      <option *ngFor="let a of anios" [value]="a">{{ a }}</option>
-    </select>
-  </div>
-</div>
+          <select formControlName="anio">
+            <option value="">Año</option>
+            <option *ngFor="let a of anios" [value]="a">{{ a }}</option>
+          </select>
+        </div>
+      </div>
       <div class="form-group full">
-  <label>Número de teléfono</label>
-  <div class="phone-row">
-    <select disabled>
-      <option>+54</option>
-    </select>
-    <input type="tel" formControlName="telefono" placeholder="Número" />
-  </div>
-</div>
-      <button type="submit" class="btn-register" (click)="onRegister()">REGISTRARSE</button>
+        <label>Número de teléfono</label>
+        <div class="phone-row">
+          <select disabled>
+            <option>+54</option>
+          </select>
+          <input type="tel" formControlName="telefono" placeholder="Número" />
+        </div>
+      </div>
+
+      <div
+        class="g-recaptcha"
+        data-sitekey="6LcICREsAAAAAKHWBF39boQk9uCQ__y6iFi7mbb2"
+        data-callback="onCaptchaSuccess"
+      ></div>
+
+      <div class="actions">
+        <button type="submit" class="btn-register">REGISTRARME</button>
+      </div>
     </form>
   </div>
 </div>

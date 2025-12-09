@@ -1,0 +1,101 @@
+.usuario-container {
+  background: linear-gradient(135deg, #4f1917 0%, #2d0a0a 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: transparent;
+}
+
+.logo {
+  height: 80px;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    height: 60px;
+  }
+}
+
+.usuario-box {
+  background-color: #8a1009;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 360px;
+  max-width: 100%;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.usuario-box h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.usuario-info p {
+  text-align: left;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.usuario-info strong {
+  color: #ffd7d2;
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.btn-volver,
+.btn-logout {
+  background-color: #ebccc7;
+  color: #8a1009;
+  font-weight: bold;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-volver:hover,
+.btn-logout:hover {
+  background-color: #ffffff;
+}
+
+.btn-logout {
+  background-color: #f5b5b2;
+}
+
+@media (max-width: 768px) {
+  .usuario-box {
+    width: 100%;
+    max-width: 320px;
+    padding: 1.5rem;
+  }
+  .usuario-info p {
+    font-size: 0.95rem;
+  }
+  .btn-volver,
+  .btn-logout {
+    font-size: 0.95rem;
+  }
+}

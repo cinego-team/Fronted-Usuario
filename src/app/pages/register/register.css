@@ -1,6 +1,6 @@
 .register-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
+  background: linear-gradient(135deg, #4f1917 0%, #2d0a0a 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@
 .logo {
   height: 65px;
   object-fit: contain;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
 .user-icon {
@@ -53,7 +53,7 @@
   color: #fff;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
   text-align: center;
-  margin-top: 100px; 
+  margin-top: 100px;
 }
 
 .register-box h2 {
@@ -87,7 +87,8 @@
   font-size: 0.95rem;
 }
 
-input,select {
+input,
+select {
   width: 100%;
   padding: 0.6rem;
   border-radius: 20px;
@@ -103,18 +104,20 @@ input::placeholder {
   color: #4a1a1a;
 }
 
-.date-row,.phone-row {
+.date-row,
+.phone-row {
   display: flex;
   gap: 0.5rem;
 }
 
-.date-row select,.phone-row select {
+.date-row select,
+.phone-row select {
   width: 33%;
 }
 
 .btn-register {
-  background-color: #f5c5c5;
-  color: #8b0f0f;
+  background-color: #ebccc7;
+  color: #8a1009;
   font-weight: bold;
   border: none;
   padding: 0.7rem 2rem;
@@ -122,7 +125,6 @@ input::placeholder {
   cursor: pointer;
   transition: 0.3s;
   width: 100%;
-  max-width: 250px;
 }
 
 .btn-register:hover {
@@ -156,8 +158,43 @@ input::placeholder {
   }
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
+  background: linear-gradient(135deg, #4f1917 0%, #2d0a0a 100%);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-btn img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.toggle-btn:hover img {
+  opacity: 1;
 }

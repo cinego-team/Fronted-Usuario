@@ -1,5 +1,5 @@
 .login-container {
-  background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
+  background: linear-gradient(135deg, #4f1917 0%, #2d0a0a 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -117,4 +117,34 @@
   .btn-login {
     font-size: 0.95rem;
   }
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-btn img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.toggle-btn:hover img {
+  opacity: 1;
 }

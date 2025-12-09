@@ -17,7 +17,18 @@
       }
 
       <label for="password">Contraseña</label>
-      <input type="password" id="password" formControlName="password" />
+      <div class="password-input">
+        <input
+          id="password"
+          [type]="mostrarPassword ? 'text' : 'password'"
+          formControlName="password"
+        />
+
+        <button type="button" class="toggle-btn" (click)="mostrarPassword = !mostrarPassword">
+          <img *ngIf="!mostrarPassword" src="../assets/eye-closed.svg" alt="Mostrar" />
+          <img *ngIf="mostrarPassword" src="../assets/eye-open.svg" alt="Ocultar" />
+        </button>
+      </div>
 
       <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 

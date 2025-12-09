@@ -2,14 +2,14 @@
   <header class="topbar">
     <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
     <div class="user-section">
-      <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
+      <img src="/assets/usuario.png" alt="Usuario" class="user-icon" (click)="OnUsuario()" />
       <span>Usuario</span>
     </div>
   </header>
 
-  <div class="pelicula-info">
+  <div class="pelicula-info" *ngIf="pelicula">
     <div class="poster">
-      <img [src]="pelicula.poster" [alt]="pelicula.titulo" loading="lazy" />
+      <img [src]="pelicula.urlImagen" [alt]="pelicula.titulo" loading="lazy" />
     </div>
 
     <div class="detalles">
@@ -17,6 +17,7 @@
       <p><strong>Director:</strong> {{ pelicula.director }}</p>
       <p><strong>Duración:</strong> {{ pelicula.duracion }} min</p>
       <p><strong>Clasificación:</strong> {{ pelicula.clasificacion }}</p>
+      <p><strong>Género:</strong> {{ pelicula.genero }}</p>
     </div>
 
     <div class="sinopsis-box">
@@ -29,46 +30,56 @@
     <h2>Funciones Disponibles</h2>
 
     <div class="funciones-lista">
-      <div *ngFor="let funcion of funciones" class="funcion-card">
+      <!-- Ahora cada función es un horario único, se muestra como una tarjeta clickeable -->
+      <div
+        *ngFor="let funcion of funciones"
+        class="funcion-card"
+        [class.selected]="funcionSeleccionada?.id === funcion.id"
+        [class.no-disponible]="!funcion.estaDisponible"
+        (click)="funcion.estaDisponible && seleccionarFuncion(funcion)"
+      >
         <div class="funcion-header">
-          <h3>{{ funcion.fecha }} {{ funcion.fecha }}</h3>
-          <p class="funcion-detalles">{{ funcion.formato }} - {{ funcion.idioma }}</p>
+          <h3>{{ funcion.fecha | date : 'EEEE, d MMMM yyyy' }}</h3>
+          <p class="funcion-hora">{{ funcion.fecha | date : 'HH:mm' }}</p>
         </div>
 
-        <div class="horarios">
-          <button
-            *ngFor="let horario of funcion.horarios"
-            [class.selected]="funcionSeleccionada?.id === funcion.id && horarioSeleccionado === horario.hora"
-            [class.no-disponible]="!horario.disponible"
-            [disabled]="!horario.disponible"
-            (click)="seleccionarHorario(funcion, horario.hora)"
-            class="horario-btn"
-          >
-            {{ horario.hora }}
-          </button>
+        <div class="funcion-info">
+          <p class="funcion-detalles">
+            <span class="badge">{{ funcion.formato.nombre }}</span>
+            <span class="badge">{{ funcion.idioma }}</span>
+          </p>
+          <p class="funcion-sala">Sala {{ funcion.sala.nroSala }}</p>
+          <p class="funcion-precio">${{ funcion.formato.precio }}</p>
         </div>
+
+        <div class="funcion-disponibilidad" *ngIf="!funcion.estaDisponible">No disponible</div>
       </div>
     </div>
   </div>
 
   <div class="footer-actions">
     <button class="btn-volver" (click)="volver()">Volver</button>
-    <button
-      class="btn-continuar"
-      (click)="continuarCompra()"
-      [disabled]="!funcionSeleccionada || !horarioSeleccionado"
-    >
+    <button class="btn-continuar" (click)="continuarCompra()" [disabled]="!funcionSeleccionada">
       Continuar con la compra
     </button>
   </div>
 </div>
 
+<!-- Modal actualizado para mostrar los datos de la función seleccionada -->
 <div class="modal-overlay" *ngIf="mostrarModal" (click)="cancelarModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <h3>Tu selección:</h3>
-    <p class="modal-pelicula">{{ pelicula.titulo }}</p>
-    <p class="modal-detalle">{{ funcionSeleccionada?.fecha }} {{ funcionSeleccionada?.fecha }} - {{ horarioSeleccionado }}</p>
-    <p class="modal-detalle">{{ funcionSeleccionada?.formato }} - {{ funcionSeleccionada?.idioma }}</p>
+    <p class="modal-pelicula">{{ pelicula?.titulo }}</p>
+    <p class="modal-detalle" *ngIf="funcionSeleccionada">
+      {{ funcionSeleccionada.fecha | date : 'EEEE, d MMMM yyyy' }} -
+      {{ funcionSeleccionada.fecha | date : 'HH:mm' }}
+    </p>
+    <p class="modal-detalle" *ngIf="funcionSeleccionada">
+      {{ funcionSeleccionada.formato.nombre }} - {{ funcionSeleccionada.idioma }}
+    </p>
+    <p class="modal-detalle" *ngIf="funcionSeleccionada">
+      Sala {{ funcionSeleccionada.sala.nroSala }} - ${{ funcionSeleccionada.formato.precio }}
+    </p>
 
     <div class="modal-buttons">
       <button class="btn-modal btn-cancelar" (click)="cancelarModal()">Cancelar</button>

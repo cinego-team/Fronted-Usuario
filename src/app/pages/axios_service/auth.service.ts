@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs'; 
-import { Router } from '@angular/router'; 
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 import { axiosAuthService } from './axios.client';
 import { config } from './env';
 
@@ -25,11 +25,9 @@ export class AuthService {
         return !!this.getToken();
     }
 
-    async login(credentials: { email: string; password: string; captcha: string }): Promise<any> {
-        localStorage.setItem('captcha_token', credentials.captcha);
-
+    async login(credentials: { email: string; password: string; }, captcha: string): Promise<any> {
         const respuesta = (
-            await axiosAuthService.post(config.APIUsuariosUrls.login, credentials)
+            await axiosAuthService.post(config.APIUsuariosUrls.login, credentials, { headers: { "x-captcha-token": captcha || "" } })
         ).data;
         const token = respuesta.accessToken;
         const refreshToken = respuesta.refreshToken;
@@ -42,13 +40,19 @@ export class AuthService {
     }
 
     async register(credentials: {
+        nombre: string;
+        apellido: string;
         email: string;
-        password: string;
-        captcha: string;
-    }): Promise<any> {
-        localStorage.setItem('captcha_token', credentials.captcha);
+        contrasena: string;
+        dd: number;
+        mm: number;
+        aaaa: number;
+        nroTelefono: string;
+    },
+        captcha: string
+    ): Promise<any> {
         const respuesta = (
-            await axiosAuthService.post(config.APIUsuariosUrls.register, credentials)
+            await axiosAuthService.post(config.APIUsuariosUrls.register, credentials, { headers: { "x-captcha-token": captcha || "" } })
         ).data;
         const token = respuesta.access_token;
         const refreshToken = respuesta.refresh_token;

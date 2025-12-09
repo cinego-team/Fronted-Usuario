@@ -10,27 +10,23 @@ export const config = {
         baseUrl: 'http://localhost:3000',
         getDatosClienteById: (id: number) => `microservicio-usuarios/datos-cliente/${id}`,
         refreshToken: 'microservicio-usuarios/refresh-token',
-        register: 'microservicio-usuarios/registro',
-        login: 'microservicio-usuarios/login',
+        register: 'microservicio-usuarios/usuario/register',
+        login: 'microservicio-usuarios/usuario/login',
+        getDatosUsuario: 'microservicio-usuarios/datos-cliente',
     },
 
     APIFuncionesUrls: {
         baseUrl: 'http://localhost:3000',
 
         findAllByPeliculaId: (id: number) =>
-            `microservicio-funciones-y-salas/funciones-por-pelicula/pelicula/${id}`,
+            `microservicio-funciones-y-salas/funciones-por-pelicula/${id}`,
 
         findAllDisponibilidadByFuncionId: (id: number) =>
-            `microservicio-funciones-y-salas/butaca-por-funcion/disponibilidad/${id}`,
+            `microservicio-funciones-y-salas/butaca-por-funcion/${id}`,
 
         getFuncionById: (id: number) =>
-            `microservicio-funciones-y-salas/funciones/${id}`,
+            `microservicio-funciones-y-salas/funcion/${id}`,
     },
-<<<<<<< Updated upstream
-    
-=======
-
->>>>>>> Stashed changes
     APIVentasUrls: {
         baseUrl: 'http://localhost:3000',
         crearVenta: 'microservicio-ventas/crear-venta', //cambiar

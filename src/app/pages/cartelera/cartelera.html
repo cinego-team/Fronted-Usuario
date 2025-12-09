@@ -1,6 +1,6 @@
 <div class="container">
   <header class="topbar">
-      <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
+    <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
     <div class="user-section">
       <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
       <span>Usuario</span>
@@ -13,17 +13,15 @@
     <div
       class="pelicula-card"
       *ngFor="let pelicula of peliculas"
-      (click)="seleccionarPelicula(pelicula)">
-
-      <div class="poster-container">
-        <img [src]="pelicula.poster" [alt]="pelicula.titulo" class="poster" loading="lazy">
+      (click)="seleccionarPelicula(pelicula)"
+    >
+      <div class="urlImagen-container">
+        <img [src]="pelicula.urlImagen" [alt]="pelicula.titulo" class="urlImagen" loading="lazy" />
       </div>
 
       <div class="pelicula-info">
         <h3 class="pelicula-titulo">{{ pelicula.titulo }}</h3>
-        <p class="pelicula-detalles">
-          {{ pelicula.estado }} - {{ pelicula.clasificacion }} - {{ pelicula.genero }}
-        </p>
+        <p class="pelicula-detalles">{{ pelicula.clasificacion }} - {{ pelicula.genero }}</p>
       </div>
     </div>
   </div>

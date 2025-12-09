@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { axiosAPIPeliculas, axiosAPIFunciones}  from './axios.client';
+import { axiosAPIPeliculas, axiosAPIFunciones } from './axios.client';
 import { config } from './env';
 
 @Injectable({
@@ -9,147 +9,181 @@ import { config } from './env';
 export class ApiService {
     constructor() { }
 
-    async getAllPeliculas(page: number): Promise<
-        Array<{
+    async getAllPeliculas(): Promise<
+        {
             id: number;
             titulo: string;
             director: string;
             duracion: number;
+            fechaEstreno: string;
             sinopsis: string;
-            poster: string;
-            estado: string;
-            clasificacion: string;
+            urlImagen: string;
             genero: string;
-        }>
+            clasificacion: string;
+        }[]
     > {
-        const datos = (await axiosAPIPeliculas.get(config.APIPeliculasUrls.getAllPeliculas, {
-            params: { page }
-        })).data;
+        const datos = (await axiosAPIPeliculas.get(config.APIPeliculasUrls.getAllPeliculas)).data;
         const respuesta = datos.map(
             (item: {
-                id: any;
+                id: number;
                 titulo: string;
                 director: string;
                 duracion: number;
+                fechaEstreno: string;
                 sinopsis: string;
-                poster: string;
-                estado: string;
-                clasificacion: string;
+                urlImagen: string;
                 genero: string;
+                clasificacion: string;
             }) => ({
                 id: item.id,
                 titulo: item.titulo,
                 director: item.director,
                 duracion: item.duracion,
+                fechaEstreno: item.fechaEstreno,
                 sinopsis: item.sinopsis,
-                poster: item.poster,
-                estado: item.estado,
-                clasificacion: item.clasificacion,
+                urlImagen: item.urlImagen,
                 genero: item.genero,
-                
+                clasificacion: item.clasificacion,
             })
         );
         return respuesta;
     }
 
     async getFuncionesByPeliculaId(id: number): Promise<
-        Array<{
+        {
             id: number;
             estaDisponible: boolean;
             fecha: Date;
-            horarios: { hora: string
-            disponible: boolean }[];
             idioma: string;
             sala: {
+                id: number;
                 nroSala: number;
-                capacidad: number;
-                estaDisponible: boolean;
             }
             formato: {
+                id: number;
                 nombre: string;
                 precio: number;
             }
-            disponibilidadButaca: {
-                nroButaca: number
-                estadoDisponibilidadButaca: string ;
-            }[];
-            peliculaId: number; 
-        }>
+        }[]
     > {
-        const datos = (await axiosAPIFunciones.get(config.APIFuncionesUrls.findAllByPeliculaId(id), {
-        })).data;
+        const datos = (await axiosAPIFunciones.get(config.APIFuncionesUrls.findAllByPeliculaId(id))).data;
         const respuesta = datos.map(
             (item: {
                 id: number;
                 estaDisponible: boolean;
                 fecha: Date;
-                horarios: { hora: string
-            disponible: boolean }[];
                 idioma: string;
                 sala: {
+                    id: number;
                     nroSala: number;
-                    capacidad: number;
-                    estaDisponible: boolean;
                 }
                 formato: {
+                    id: number;
                     nombre: string;
                     precio: number;
                 }
-                disponibilidadButaca: {
-                    nroButaca: number
-                    estadoDisponibilidadButaca: string ;
-                }[];
-                peliculaId: number; 
             }) => ({
                 id: item.id,
                 estaDisponible: item.estaDisponible,
-                fecha: item.fecha,
-                horarios: item.horarios,
+                fecha: new Date(item.fecha),
                 idioma: item.idioma,
                 sala: {
+                    id: item.sala.id,
                     nroSala: item.sala.nroSala,
-                    capacidad: item.sala.capacidad,
-                    estaDisponible: item.sala.estaDisponible,
                 },
                 formato: {
+                    id: item.formato.id,
                     nombre: item.formato.nombre,
-                    precio: item.formato.precio,
+                    precio: item.formato.precio
                 },
-                disponibilidadButaca: item.disponibilidadButaca.map(butaca => ({   //corregir, no se si esta bien
-                    nroButaca: butaca.nroButaca,
-                    estadoDisponibilidadButaca: butaca.estadoDisponibilidadButaca,
-                })),
-                peliculaId: item.peliculaId,
-                
             })
         );
         return respuesta;
     }
 
-    async getDisponibilidadesByFuncionId(id: number): Promise<
-        Array<{
+    async getFuncionById(id: number): Promise<
+        {
             id: number;
-            funcionId: number;
-            butacaId: number;
-            estadoDisponibilidadButacaId: string;
-        }>
-    > {
-        const datos = (await axiosAPIFunciones.get(config.APIFuncionesUrls.findAllDisponibilidadByFuncionId(id), {
-        })).data;
-        const respuesta = datos.map(
-            (item: {
+            estaDisponible: boolean;
+            fecha: string;      // llega como string en JSON
+            peliculaId: number;
+            sala: {
                 id: number;
-                funcionId: number;
-                butacaId: number;
-                estadoDisponibilidadButacaId: string;
-            }) => ({
-                id: item.id,
-                funcionId: item.funcionId,
-                butacaId: item.butacaId,
-                estadoDisponibilidadButacaId: item.estadoDisponibilidadButacaId,
-                
-            })
-        );
-        return respuesta;
+                nro_sala: number;
+            };
+            formato: {
+                id: number;
+                nombre: string;
+                precio: number;
+            };
+        }
+    > {
+        const funcion = (await axiosAPIFunciones.get(config.APIFuncionesUrls.getFuncionById(id))).data;
+        return funcion;
+    }
+
+    async getPeliculaById(id: number): Promise<
+        {
+            id: number;
+            titulo: string;
+            director: string;
+            duracion: number;
+            fechaEstreno: string;
+            sinopsis: string;
+            url: string;
+            empleadoResponsable: number;
+            idioma: string;
+            genero: string;
+            clasificacion: string;
+            estado: string;
+        }
+    > {
+        const pelicula = (await axiosAPIPeliculas.get(config.APIPeliculasUrls.getPeliculaById(id))).data;
+        return pelicula;
+    }
+
+    async getDisponibilidadByFuncionId(id: number): Promise<
+        {
+            id: number;
+            butaca: {
+                nroButaca: number;
+                fila: {
+                    letraFila: string;
+                };
+            }
+            estadoDisponibilidadButaca: {
+                estadoButaca: string;   // 'DISPONIBLE' | 'OCUPADA' | 'RESERVADA' | ...
+            };
+        }[]
+    > {
+        const disponibilidades = (await axiosAPIFunciones.get(config.APIFuncionesUrls.findAllDisponibilidadByFuncionId(id))).data;
+        return disponibilidades;
+    }
+
+    async getDatosUsuario(): Promise<
+        {
+            nombre: string;
+            apellido: string;
+            email: string;
+            fechaNacimiento: string;
+            nroTelefono: string;
+            tipoCliente: {
+                denominacion: string;
+                descripcion: number;
+            }
+        }
+    > {
+        const datos = (await axiosAPIPeliculas.get(config.APIUsuariosUrls.getDatosUsuario)).data;
+        return {
+            nombre: datos.nombre,
+            apellido: datos.apellido,
+            email: datos.email,
+            fechaNacimiento: datos.fechaNacimiento,
+            nroTelefono: datos.nroTelefono,
+            tipoCliente: {
+                denominacion: datos.tipoCliente.denominacion,
+                descripcion: datos.tipoCliente.descripcion,
+            }
+        };
     }
 }
