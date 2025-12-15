@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../axios_service/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-interface RegisterResponse {
-    message?: string;
-    access_token?: string;
-}
+declare const grecaptcha: any;
 
 @Component({
     selector: 'app-register',
@@ -17,12 +14,13 @@ interface RegisterResponse {
     imports: [CommonModule, ReactiveFormsModule],
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     formulario: FormGroup;
     errorMessage: string | null = null;
     successMessage: string | null = null;
     captchaToken: string | null = null;
     mostrarPassword = false;
+    private captchaId: number | null = null;
 
     dias = Array.from({ length: 31 }, (_, i) => i + 1);
 
@@ -59,13 +57,29 @@ export class RegisterComponent {
 
     ngOnInit() {
         (window as any).onCaptchaSuccess = (token: string) => {
-            const event = new CustomEvent("captcha-success", { detail: token });
-            window.dispatchEvent(event);
+            this.captchaToken = token;
         };
+    }
 
-        window.addEventListener("captcha-success", (e: any) => {
-            this.captchaToken = e.detail;
-        });
+    ngAfterViewInit() {
+        const interval = setInterval(() => {
+            if (typeof grecaptcha !== 'undefined') {
+                clearInterval(interval);
+
+                this.captchaId = grecaptcha.render('captcha', {
+                    sitekey: '6LcICREsAAAAAKHWBF39boQk9uCQ__y6iFi7mbb2',
+                    callback: (token: string) => {
+                        this.captchaToken = token;
+                    }
+                });
+            }
+        }, 100);
+    }
+
+    ngOnDestroy() {
+        if (this.captchaId !== null && typeof grecaptcha !== 'undefined') {
+            grecaptcha.reset(this.captchaId);
+        }
     }
 
     onRegister() {

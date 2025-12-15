@@ -1,29 +1,17 @@
 <div class="screen">
   <header class="topbar">
-    <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
-    <div class="user-section">
-      <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
-      <span>Usuario</span>
-    </div>
+    <a href="cartelera"><img src="/assets/logo.png" alt="CineGo" class="logo" /></a>
   </header>
 
   <main class="content">
     <section class="card" role="status" aria-live="polite">
       <h1>¡Tu compra fue un éxito!</h1>
-      <p>
-        El pago se realizó correctamente y tus entradas ya están en tu mail.
-      </p>
-      <p>
-        Revisá tu bandeja de entrada (o spam) y ¡preparate para disfrutar la película! 🍿
-      </p>
+      <p>El pago se realizó correctamente y tus entradas ya están en tu mail.</p>
+      <p>Revisá tu bandeja de entrada (o spam) y ¡preparate para disfrutar la película! 🍿</p>
 
       <div class="actions">
-            <button class="btn ghost" (click)="volverACartelera()">Volver a la cartelera</button>
-        </div>
-
-      
-
-      
+        <button class="btn ghost" (click)="volverACartelera()">Volver a la cartelera</button>
+      </div>
     </section>
   </main>
 </div>

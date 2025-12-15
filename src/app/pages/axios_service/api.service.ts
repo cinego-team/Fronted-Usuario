@@ -54,7 +54,10 @@ export class ApiService {
             id: number;
             estaDisponible: boolean;
             fecha: Date;
-            idioma: string;
+            idioma: {
+                id: number;
+                nombre: string;
+            };
             sala: {
                 id: number;
                 nroSala: number;
@@ -152,7 +155,7 @@ export class ApiService {
                 };
             }
             estadoDisponibilidadButaca: {
-                estadoButaca: string;   // 'DISPONIBLE' | 'OCUPADA' | 'RESERVADA' | ...
+                nombre: string;
             };
         }[]
     > {
@@ -169,7 +172,7 @@ export class ApiService {
             nroTelefono: string;
             tipoCliente: {
                 denominacion: string;
-                descripcion: number;
+                descripcion: string;
             }
         }
     > {

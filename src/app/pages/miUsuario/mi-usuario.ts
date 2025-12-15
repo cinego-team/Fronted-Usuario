@@ -15,7 +15,7 @@ interface Usuario {
     nroTelefono: string;
     tipoCliente: {
         denominacion: string;
-        descripcion: number;
+        descripcion: string;
     }
 }
 
@@ -46,10 +46,6 @@ export class MiUsuarioComponent {
         const data = await this.apiService.getDatosUsuario();
         this.userData = data;
         this.globalStatusService.setLoading(false);
-    }
-
-    volver(): void {
-        this.router.navigate(['/cartelera']);
     }
 
     logout(): void {

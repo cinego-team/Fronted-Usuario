@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../axios_service/api.service';
 import { GlobalStatusService } from '../axios_service/global-status.service';
 
-interface Pelicula {
+export interface Pelicula {
     id: number;
     titulo: string;
     director: string;
@@ -43,29 +43,19 @@ export class CarteleraComponent implements OnInit {
 
     async initialization(): Promise<void> {
         this.globalStatusService.setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 500)); //Decorativo
-        const data = await this.apiService.getAllPeliculas();
-        if (data.length === 0) {
+        const peliculasBack = await this.apiService.getAllPeliculas();
+        if (peliculasBack.length === 0) {
             alert('No hay peliculas para mostrar.');
             this.globalStatusService.setLoading(false);
             return;
         }
-        this.peliculas = data;
+        this.peliculas = peliculasBack;
         this.globalStatusService.setLoading(false);
     }
 
     seleccionarPelicula(pelicula: Pelicula): void {
-        // Navegar a la pantalla de funciones pasando el ID de la película
         this.router.navigate(['/pelicula', pelicula.id], {
             state: { pelicula: pelicula },
         });
-    }
-
-    OnUsuario() {
-        this.router.navigate(['/mi-usuario']);
-    }
-
-    volver(): void {
-        this.router.navigate(['/cartelera']);
     }
 }

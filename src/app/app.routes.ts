@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { SeleccionButacaComponent } from './pages/SeleccionButaca/seleccion-butaca/seleccion-butaca';
-import { ResumenSeleccionComponent } from './pages/ResumenSeleccion/resumen-seleccion/resumen-seleccion';
+import { SeleccionButacaComponent } from './pages/SeleccionButaca/seleccion-butaca';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
 import { CarteleraComponent } from './pages/cartelera/cartelera';
@@ -14,7 +13,6 @@ export const routes: Routes = [
     { path: 'cartelera', component: CarteleraComponent },
     { path: 'pelicula/:id', component: PeliculaComponent },
     { path: 'seleccion-butaca', component: SeleccionButacaComponent },
-    { path: 'resumen-seleccion', component: ResumenSeleccionComponent },
     { path: 'seleccion-butaca/:idFuncion', component: SeleccionButacaComponent },
     { path: 'notificaciondeenvio', component: notificaciondeenvioComponent },
     { path: 'mi-usuario', component: MiUsuarioComponent },

@@ -1,22 +1,5 @@
-.funcion-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #4f1917 0%, #4f1917 100%);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 1rem;
-}
-
 .logo {
-  height: 56px;
+  height: clamp(48px, 5vw, 80px);
   object-fit: contain;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -26,27 +9,14 @@
   transform: scale(1.05);
 }
 
-.user-icon {
-  height: 40px;
-  cursor: pointer;
-}
-
-.user-section {
+.funcion-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4f1917 0%, #4f1917 100%);
+  margin: 0;
+  padding: 0;
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: #f8d8c4;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-@media (min-width: 992px) {
-  .logo {
-    height: 80px;
-  }
-  .user-icon {
-    height: 80px;
-  }
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 .pelicula-info {
@@ -290,53 +260,7 @@
   font-weight: 600;
 }
 
-.footer-actions {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-top: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn-volver,
-.btn-continuar {
-  flex: 1;
-  padding: 0.9rem;
-  border: 0;
-  border-radius: 25px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-.btn-volver {
-  background: #ebccc7;
-  color: #4a1a1a;
-}
-
-.btn-volver:hover {
-  transform: translateY(-1px);
-  background: #ddb8b0;
-}
-
-.btn-continuar {
-  background: #8b3a3a;
-  color: #fff;
-}
-
-.btn-continuar:hover:not(:disabled) {
-  background: #a04545;
-  transform: translateY(-1px);
-}
-
-.btn-continuar:disabled {
-  background: #6b2424;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.modal-overlay {
+.resumen-overlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -346,7 +270,7 @@
   justify-content: center;
 }
 
-.modal-content {
+.resumen-content {
   background: #6a0400;
   padding: 2rem;
   border-radius: 15px;
@@ -356,33 +280,33 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-.modal-content h3 {
+.resumen-content h3 {
   color: #ebccc7;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
 
-.modal-pelicula {
+.resumen-pelicula {
   color: #fff;
   font-size: 1.3rem;
   font-weight: 700;
   margin: 0.5rem 0;
 }
 
-.modal-detalle {
+.resumen-detalle {
   color: #ebccc7;
   margin: 0.5rem 0;
   font-size: 1.05rem;
 }
 
-.modal-buttons {
+.resumen-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 1.5rem;
 }
 
-.modal-buttons button {
+.resumen-buttons button {
   padding: 0.8rem 2rem;
   border: 0;
   border-radius: 25px;
@@ -392,21 +316,16 @@
   transition: transform 0.15s ease;
 }
 
-.btn-cancelar {
+.btn-cancelar-resumen {
   background: #ebccc7;
   color: #4a1a1a;
 }
 
-.btn-continuar-modal {
+.btn-continuar-resumen {
   background: #a04545;
   color: #fff;
 }
 
-.modal-buttons button:hover {
+.resumen-buttons button:hover {
   transform: scale(1.05);
-}
-
-:host {
-  display: block;
-  overflow-x: hidden;
 }

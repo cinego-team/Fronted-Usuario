@@ -1,14 +1,9 @@
 <header class="topbar">
-  <img src="/assets/logo.png" alt="CineGo" class="logo" (click)="volver()" />
-  <div class="user-section">
-    <img src="/assets/usuario.png" alt="Usuario" class="user-icon" />
-    <span>Usuario</span>
-  </div>
+  <a href="cartelera"><img src="/assets/logo.png" alt="CineGo" class="logo" /></a>
 </header>
 
 <div class="wrapper">
   <div class="main-container">
-    <!-- Panel Izquierdo: Butacas -->
     <main class="panel">
       <div class="screen">PANTALLA</div>
 
@@ -18,9 +13,9 @@
           <button
             *ngFor="let s of byRow(r); trackBy: trackBySeat"
             class="seat"
-            [class.selected]="s.status === 'seleccionada'"
-            [class.occupied]="s.status === 'ocupada'"
-            [disabled]="s.status === 'ocupada'"
+            [class.selected]="s.status === 'SELECCIONADA'"
+            [class.occupied]="s.status === 'OCUPADA'"
+            [disabled]="s.status === 'OCUPADA'"
             (click)="toggle(s)"
           >
             {{ s.id }}
@@ -38,11 +33,7 @@
 
       <div class="actions">
         <button class="btn ghost" (click)="cancelar()">Cancelar</button>
-        <button
-          class="btn"
-          [disabled]="totalSelectedCount() === 0"
-          (click)="continuar()"
-        >
+        <button class="btn" [disabled]="totalSelectedCount() === 0" (click)="continuar()">
           Continuar
         </button>
       </div>
@@ -66,5 +57,39 @@
         </div>
       </div>
     </aside>
+  </div>
+</div>
+
+<div class="wrapper-resumen" *ngIf="mostrarResumen" (click)="cancelarResumen()">
+  <div class="resumen-content" (click)="$event.stopPropagation()">
+    <div class="summary-card">
+      <div class="summary-cols">
+        <div class="col left">
+          <h3>Tu selección:</h3>
+          <p>{{ this.seleccion!.tituloPelicula }}</p>
+          <p>{{ this.seleccion!.fecha | date : 'dd/MM/yyyy' }}</p>
+          <p>{{ this.seleccion!.fecha | date : 'HH:mm' }} hs</p>
+          <p>Formato - {{ this.seleccion!.nombreFormato }}</p>
+        </div>
+
+        <div class="col right">
+          <h3>Tus Butacas:</h3>
+          <p *ngIf="this.seleccion!.asientos.length; else noSeats">
+            {{ this.seleccion!.asientos.join(', ') }}
+          </p>
+          <ng-template #noSeats>
+            <em>No seleccionaste butacas.</em>
+          </ng-template>
+          <p>Total - ${{ total() }}</p>
+        </div>
+      </div>
+
+      <div class="summary-actions">
+        <button class="btn ghost" (click)="cancelar()">Cancelar</button>
+        <button class="btn" [disabled]="!this.seleccion!.asientos.length" (click)="pagar()">
+          Pagar
+        </button>
+      </div>
+    </div>
   </div>
 </div>

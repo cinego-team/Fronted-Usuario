@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../axios_service/auth.service';
 import { TokenTimeoutService } from '../axios_service/tokenTimeout.service';
@@ -13,12 +13,11 @@ declare const grecaptcha: any;
     templateUrl: './login.html',
     styleUrl: './login.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     formulario: FormGroup;
-    errorMessage: string | null = null;
-    successMessage: string | null = null;
     captchaToken: string | null = null;
     mostrarPassword = false;
+    private captchaId: number | null = null;
 
     constructor(
         private authService: AuthService,
@@ -34,13 +33,29 @@ export class LoginComponent {
 
     ngOnInit() {
         (window as any).onCaptchaSuccess = (token: string) => {
-            const event = new CustomEvent("captcha-success", { detail: token });
-            window.dispatchEvent(event);
+            this.captchaToken = token;
         };
+    }
 
-        window.addEventListener("captcha-success", (e: any) => {
-            this.captchaToken = e.detail;
-        });
+    ngAfterViewInit() {
+        const interval = setInterval(() => {
+            if (typeof grecaptcha !== 'undefined') {
+                clearInterval(interval);
+
+                this.captchaId = grecaptcha.render('captcha', {
+                    sitekey: '6LcICREsAAAAAKHWBF39boQk9uCQ__y6iFi7mbb2',
+                    callback: (token: string) => {
+                        this.captchaToken = token;
+                    }
+                });
+            }
+        }, 100);
+    }
+
+    ngOnDestroy() {
+        if (this.captchaId !== null && typeof grecaptcha !== 'undefined') {
+            grecaptcha.reset(this.captchaId);
+        }
     }
 
     OnLogin() {

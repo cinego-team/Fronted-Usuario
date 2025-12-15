@@ -1,9 +1,7 @@
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<div class="login-container">
-  <header class="topbar">
-    <img src="/assets/logo.png" alt="CineGo" class="logo" />
-  </header>
+<div class="page login-page">
+  <img src="/assets/logo.png" alt="CineGo" class="logo" />
 
   <div class="login-box">
     <h2>¡BIENVENIDO!</h2>
@@ -36,11 +34,7 @@
         <button type="submit" class="btn-login">INICIAR SESIÓN</button>
       </div>
 
-      <div
-        class="g-recaptcha"
-        data-sitekey="6LcICREsAAAAAKHWBF39boQk9uCQ__y6iFi7mbb2"
-        data-callback="onCaptchaSuccess"
-      ></div>
+      <div id="captcha"></div>
 
       <p class="register-text">
         ¿Aún no tienes cuenta?

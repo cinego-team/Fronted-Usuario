@@ -20,10 +20,6 @@ export class TokenTimeoutService {
         }, this.timeoutMs);
     }
 
-    resetCountdown() {
-        this.startCountdown(); // reinicia el contador
-    }
-
     clear() {
         if (this.timeoutRef) {
             clearTimeout(this.timeoutRef);
@@ -32,10 +28,10 @@ export class TokenTimeoutService {
 
     async refreshToken() {
         await this.authService.refreshToken();
+        this.startCountdown();
     }
 
     private logout() {
         this.authService.logout();
-        console.log('Sesión cerrada');
     }
 }

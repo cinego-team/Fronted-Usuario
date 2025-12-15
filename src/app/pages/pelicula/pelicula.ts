@@ -3,12 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../axios_service/api.service';
 import { GlobalStatusService } from '../axios_service/global-status.service';
+import { Pelicula } from '../cartelera/cartelera';
 
-interface Funcion {
+export interface Funcion {
     id: number;
     estaDisponible: boolean;
     fecha: Date;
-    idioma: string;
+    idioma: {
+        id: number;
+        nombre: string;
+    };
     sala: {
         id: number;
         nroSala: number;
@@ -18,18 +22,6 @@ interface Funcion {
         nombre: string;
         precio: number;
     }
-}
-
-interface Pelicula {
-    id: number;
-    titulo: string;
-    director: string;
-    duracion: number;
-    fechaEstreno: string;
-    sinopsis: string;
-    urlImagen: string;
-    genero: string;
-    clasificacion: string;
 }
 
 @Component({
@@ -44,22 +36,21 @@ export class PeliculaComponent implements OnInit {
     pelicula: Pelicula | null = null;
     funciones: Funcion[] = [];
     funcionSeleccionada: Funcion | null = null;
-    mostrarModal = false;
+    mostrarResumen = false;
 
-    constructor(private route: ActivatedRoute, private router: Router, private readonly apiService: ApiService,
-        private readonly globalStatusService: GlobalStatusService) { }
+    constructor(
+        private router: Router,
+        private readonly apiService: ApiService,
+        private readonly globalStatusService: GlobalStatusService
+    ) { }
 
     ngOnInit(): void {
         const navigation = this.router.getCurrentNavigation();
-        if (navigation?.extras?.state) {
-            const peliculaData = navigation.extras.state['pelicula'];
-            if (peliculaData) {
-                this.pelicula = peliculaData;
-            }
-        }
-        if (window.history.state && window.history.state.pelicula) {
-            this.pelicula = window.history.state.pelicula;
-        }
+        const pelicula =
+            navigation?.extras?.state?.['pelicula'] ??
+            history.state?.pelicula ??
+            null;
+        this.pelicula = pelicula;
         this.initialization()
     }
 
@@ -68,45 +59,36 @@ export class PeliculaComponent implements OnInit {
         if (!this.pelicula) {
             throw new Error('Ocurrió un error al cargar la película.');
         }
-        const data = await this.apiService.getFuncionesByPeliculaId(this.pelicula.id);
-        if (data.length === 0) {
-            alert('No hay peliculas para mostrar.');
+        const funcionesBack = await this.apiService.getFuncionesByPeliculaId(this.pelicula.id);
+        if (funcionesBack.length === 0) {
+            alert('No hay funciones para mostrar.');
             this.globalStatusService.setLoading(false);
             return;
         }
-        this.funciones = data;
+        this.funciones = funcionesBack;
         this.globalStatusService.setLoading(false);
     }
 
     seleccionarFuncion(funcion: Funcion): void {
         this.funcionSeleccionada = funcion;
+        this.mostrarResumen = true;
     }
 
-    continuarCompra(): void {
-        if (this.funcionSeleccionada) {
-            this.mostrarModal = true;
-        } else {
-            alert('Por favor selecciona un horario');
-        }
-    }
-
-    cancelarModal(): void {
-        this.mostrarModal = false;
+    cancelarResumen(): void {
+        this.mostrarResumen = false;
+        this.funcionSeleccionada = null;
     }
 
     confirmarCompra(): void {
         if (this.pelicula && this.funcionSeleccionada) {
-            this.mostrarModal = false;
+            this.mostrarResumen = false;
             this.router.navigate(['/seleccion-butaca'], {
                 state: {
-                    funcionId: this.funcionSeleccionada.id
+                    funcion: this.funcionSeleccionada,
+                    pelicula: this.pelicula
                 },
             });
         }
-    }
-
-    OnUsuario() {
-        this.router.navigate(['/mi-usuario']);
     }
 
     volver(): void {

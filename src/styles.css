@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+app-root {
+  overflow-x: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.page {
+  background: linear-gradient(180deg, #4f1917 0%, #2d0a0a 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: #4f1917;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

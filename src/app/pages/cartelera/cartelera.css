@@ -1,34 +1,40 @@
-.container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #4F1917 0%, #2d0a0a 100%);
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; 
+.logo {
+  height: clamp(48px, 5vw, 80px);
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .8rem 1rem;
-  
+.logo:hover {
+  transform: scale(1.05);
 }
 
-.logo { height: 56px; object-fit: contain; }
+.user-icon {
+  height: clamp(32px, 5vw, 50px);
+  object-fit: contain;
+  cursor: pointer;
+}
 
-.user-icon { height: 40px; }
-
-.user-section {
+.user-link {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: .4rem;
-  color: #f8d8c4;
+  gap: 0rem;
+  padding: 0rem 1rem;
+  color: #fff;
+  text-decoration: none;
   font-size: 14px;
+  transition: transform 0.2s ease;
 }
 
-@media (min-width: 992px){
-  .logo { height: 80px; }
-  .user-icon { height: 80px; }
+.user-link span {
+  color: inherit;
+}
+
+@media (hover: hover) {
+  .user-link:hover {
+    transform: scale(1.05);
+  }
 }
 
 .titulo-cartelera {
@@ -38,7 +44,6 @@
   font-weight: 700;
   margin: 24px 0 10px;
   letter-spacing: 3px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
 }
 
 /* GRID RESPONSIVE (estilo SudCinemas)
@@ -51,20 +56,26 @@
 .peliculas-grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-@media (min-width: 600px){
-  .peliculas-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (min-width: 600px) {
+  .peliculas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
-@media (min-width: 900px){
-  .peliculas-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+@media (min-width: 900px) {
+  .peliculas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
-@media (min-width: 1200px){
-  .peliculas-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+@media (min-width: 1200px) {
+  .peliculas-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .pelicula-card {
@@ -75,13 +86,13 @@
   overflow: hidden;
   width: 100%;
   max-width: none;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-@media (hover: hover) and (min-width: 992px){
+@media (hover: hover) and (min-width: 992px) {
   .pelicula-card:hover {
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-color: #ff6b6b;
   }
 }
@@ -90,13 +101,15 @@
   width: 100%;
   aspect-ratio: 2 / 3;
   background-color: #8a1009;
-  border: 4px solid #8a1009;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 10px;
 }
 
-.poster {
+@media (max-width: 479px) {
+  .poster-container {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+.poster-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -110,27 +123,23 @@
 
 .pelicula-titulo {
   color: #fff;
-  font-size: 18px;
+  font-size: clamp(12px, 2.5vw, 18px);
   font-weight: 700;
   margin-bottom: 6px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .pelicula-detalles {
-  color: rgba(255,255,255,.85);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(8px, 2.5vw, 12px);
   line-height: 1.4;
 }
 
-@media (max-width: 575.98px){
-  .topbar { padding: .6rem .75rem; }
-  .peliculas-grid { padding: .75rem; gap: 1rem; }
-  .poster-container { margin: 8px; }
+:host {
+  display: block;
 }
 
-:host { display: block; overflow-x: hidden; }
-
-.logo-link {
+/* .logo-link {
   display: inline-block;
   cursor: pointer;
 }
@@ -141,4 +150,4 @@
 
 .logo-link img:hover {
   transform: scale(1.05);
-}
+} */

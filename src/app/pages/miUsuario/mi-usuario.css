@@ -1,34 +1,18 @@
-.usuario-container {
-  background: linear-gradient(135deg, #4f1917 0%, #2d0a0a 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.usuario-page {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.topbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background: transparent;
 }
 
 .logo {
-  height: 80px;
+  height: clamp(48px, 5vw, 80px);
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-@media (max-width: 600px) {
-  .logo {
-    height: 60px;
-  }
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .usuario-box {
