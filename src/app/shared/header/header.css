@@ -1,0 +1,32 @@
+.logo {
+  height: clamp(48px, 5vw, 80px);
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.user-icon {
+  height: clamp(32px, 5vw, 50px);
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.user-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0rem;
+  padding: 0rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.user-link span {
+  color: inherit;
+}
