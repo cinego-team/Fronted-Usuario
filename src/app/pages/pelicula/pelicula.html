@@ -1,6 +1,4 @@
-<header class="topbar">
-  <a href="cartelera"><img src="/assets/logo.png" alt="CineGo" class="logo" /></a>
-</header>
+<app-header></app-header>
 <div class="funcion-container">
   <div class="pelicula-info" *ngIf="pelicula">
     <div class="poster">
@@ -39,8 +37,9 @@
 
         <div class="funcion-info">
           <p class="funcion-detalles">
-            <span class="badge">{{ funcion.formato.nombre }}</span>
-            <span class="badge">{{ funcion.idioma.nombre }}</span>
+            <span class="badge">{{ funcion?.formato?.nombre }}</span>
+            <span class="badge">{{ funcion?.idioma?.nombre }}</span>
+            <span class="badge">{{ funcion?.sala?.nroSala }}</span>
           </p>
           <p class="funcion-precio">${{ funcion.formato.precio }}</p>
         </div>
@@ -59,7 +58,8 @@
         {{ funcionSeleccionada.fecha | date : 'HH:mm' }} hs
       </p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
-        {{ funcionSeleccionada.formato.nombre }} - {{ funcionSeleccionada.idioma.nombre }}
+        {{ funcionSeleccionada?.formato?.nombre }} -
+        {{ funcionSeleccionada.idioma.nombre || 'Sin idioma' }}
       </p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
         ${{ funcionSeleccionada.formato.precio }}
