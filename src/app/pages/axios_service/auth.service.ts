@@ -25,7 +25,33 @@ export class AuthService {
         return !!this.getToken();
     }
 
-    async login(credentials: { email: string; password: string; }, captcha: string): Promise<any> {
+    decodeToken(token: string): any {
+        try {
+        const base64Url = token.split(".")[1]
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/")
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join(""),
+        )
+        return JSON.parse(jsonPayload)
+        } catch (error) {
+        console.error("Error decodificando token:", error)
+        return null
+        }
+    }
+
+    getUserRole(): string | null {
+        const token = this.getToken()
+        if (!token) return null
+
+        const decoded = this.decodeToken(token)
+        // El rol puede estar en diferentes propiedades según cómo se generó el token
+        return decoded?.role?.name || decoded?.role || decoded?.userRole || null
+    } 
+
+    async login(credentials: { email: string; password: string;}, captcha: string): Promise<any> {
         const respuesta = (
             await axiosAuthService.post(config.APIUsuariosUrls.login, credentials, { headers: { "x-captcha-token": captcha || "" } })
         ).data;

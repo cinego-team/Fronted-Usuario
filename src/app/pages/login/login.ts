@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     captchaToken: string | null = null;
     mostrarPassword = false;
     private captchaId: number | null = null;
+    private readonly EXPECTED_ROLE = "CLIENTE" // Para el frontend de clientes
+
 
     constructor(
         private authService: AuthService,
@@ -71,11 +73,25 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.authService
             .login({
                 email: this.formulario.value.email,
-                password: this.formulario.value.password
+                password: this.formulario.value.password,
             }, this.captchaToken)
             .then(() => {
-                this.tokenTimeoutService.startCountdown();
-                this.router.navigate(['/cartelera']);
+                const userRole = this.authService.getUserRole()
+
+                if (userRole !== this.EXPECTED_ROLE) {
+                // Si el rol no coincide, cerrar sesión inmediatamente
+                this.authService.logout()
+                alert(
+                    `Acceso denegado. Este portal es solo para usuarios con rol ${this.EXPECTED_ROLE}. Tu rol es: ${userRole}`,
+                )
+                ;(window as any).grecaptcha.reset()
+                this.captchaToken = null
+                return
+                }
+
+                // Si el rol es correcto, continuar normalmente
+                this.tokenTimeoutService.startCountdown()
+                this.router.navigate(["/cartelera"])
             })
             .catch((error) => {
                 alert('Login fallido. Verifica tus credenciales.');
