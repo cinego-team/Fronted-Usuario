@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     OnLogin() {
+        this.router.navigate(['/cartelera']);
         if (this.formulario.invalid) {
             alert('Por favor, completa todos los campos correctamente.');
             this.formulario.markAllAsTouched();
