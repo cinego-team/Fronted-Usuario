@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { axiosAPIPeliculas, axiosAPIFunciones } from './axios.client';
+import { axiosAPIPeliculas, axiosAPIFunciones, axiosAPIVentas } from './axios.client';
 import { config } from './env';
+
 
 @Injectable({
   providedIn: 'root',
@@ -180,4 +181,23 @@ export class ApiService {
       },
     };
   }
+ async crearVenta(payload: {
+    funcionId: number;
+    disponibilidadButacaIds: number[]; 
+  }) {
+    console.log(
+      'URL FINAL:',
+      config.APIVentasUrls.baseUrl + '/microservicio-ventas/abrir-venta'
+    );
+
+    const response = await axiosAPIVentas.post(
+      'microservicio-ventas/abrir-venta',
+      payload
+    );
+
+    return response.data;
+  }
+
+
+
 }

@@ -7,12 +7,12 @@ import { Funcion } from '../pelicula/pelicula';
 import { GlobalStatusService } from '../axios_service/global-status.service';
 
 interface Seat {
-    id: string;
-    row: string;
-    number: number;
-    status: string;
+  id: string; // "4C"
+  disponibilidadButacaId: number; // ID real del backend
+  row: string;
+  number: number;
+  status: string;
 }
-
 interface ButacaResponse {
     id: number;
     butaca: {
@@ -27,6 +27,7 @@ interface ButacaResponse {
 }
 
 export interface Seleccion {
+    funcionId: number;          
     asientos: string[],
     tituloPelicula: string,
     fecha: string,
@@ -53,6 +54,7 @@ export class SeleccionButacaComponent implements OnInit {
     total = signal(0);
     totalSelected = computed(() => this.selectedIds().size);
     seleccion: Seleccion = {
+        funcionId: 0,               
         asientos: [],
         tituloPelicula: '',
         fecha: '',
@@ -89,6 +91,7 @@ export class SeleccionButacaComponent implements OnInit {
             this.globalStatusService.setLoading(true);
             if (this.pelicula && this.funcion) {
                 this.seleccion = {
+                    funcionId: this.funcion.id,   
                     asientos: [],
                     tituloPelicula: this.pelicula.titulo,
                     fecha: new Date(this.funcion.fecha).toString(),
@@ -127,15 +130,16 @@ export class SeleccionButacaComponent implements OnInit {
     private mapFromApi(b: ButacaResponse): Seat {
         const fila = b.butaca.fila.letraFila;
         const nro = b.butaca.nroButaca;
-        const estadoNombre =
-            b.estadoDisponibilidadButaca.nombre;
+
         return {
-            id: `${nro}${fila}`,
+            id: `${nro}${fila}`, // visual
+            disponibilidadButacaId: b.id, // 👈 ESTE ES EL IMPORTANTE
             row: fila,
             number: nro,
-            status: estadoNombre,
+            status: b.estadoDisponibilidadButaca.nombre,
         };
     }
+
 
     byRow(row: string) {
         return this.seats().filter((s) => s.row === row);
@@ -197,13 +201,37 @@ export class SeleccionButacaComponent implements OnInit {
         this.mostrarResumen = false;
     }
 
-    pagar() {
-        alert(
-            `Pagando ${this.seleccion?.tituloPelicula} - Asientos: ${this.seleccion?.asientos.join(
-                ', '
-            )} - Total: $${this.total()}`
-        )
+    async pagar() {
+        try {
+            const idsSeleccionados = this.seats()
+            .filter(seat => this.selectedIds().has(seat.id))
+            .map(seat => seat.disponibilidadButacaId); // 👈 number[]
+
+            const payload = {
+            funcionId: this.seleccion.funcionId,
+            disponibilidadButacaIds: idsSeleccionados,
+            };
+
+            console.log('PAYLOAD FRONTEND:', payload);
+
+            const resp = await this.apiService.crearVenta(payload);
+
+            if (resp.urlPagoMP) {
+            window.location.href = resp.urlPagoMP;
+            } else {
+            alert('No se pudo iniciar el pago');
+            console.error(resp);
+            }
+        } catch (error: any) {
+            console.error('🔥 ERROR EN ABRIR VENTA:', error?.response?.data || error);
+            alert('Error al conectar con el servicio de pago');
+        }
     }
+
+
+
+
+
 }
 
 

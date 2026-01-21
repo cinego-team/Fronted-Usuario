@@ -86,8 +86,9 @@ axiosAPIVentas.interceptors.request.use((config) => {
     const refreshToken = localStorage.getItem('refresh_token');
     const captchaToken = localStorage.getItem('captcha_token');
     if (token) {
-        config.headers.Authorization = token;
+        config.headers.Authorization = `Bearer ${token}`;
     }
+
     if (refreshToken) {
         config.headers['refresh-token'] = refreshToken;
     }

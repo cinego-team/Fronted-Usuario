@@ -29,6 +29,6 @@ export const config = {
     },
     APIVentasUrls: {
         baseUrl: 'http://localhost:3000',
-        crearVenta: 'microservicio-ventas/crear-venta', //cambiar
+        crearVenta: 'microservicio-ventas/abrir-venta',
     }
 }
