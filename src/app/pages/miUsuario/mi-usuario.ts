@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../axios_service/auth.service';
-import { TokenTimeoutService } from '../axios_service/tokenTimeout.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalStatusService } from '../axios_service/global-status.service';
-import { ApiService } from '../axios_service/api.service';
 
 interface Usuario {
     nombre: string;
@@ -33,7 +31,6 @@ export class MiUsuarioComponent {
     constructor(
         private authService: AuthService,
         private router: Router,
-        private readonly apiService: ApiService,
         private readonly globalStatusService: GlobalStatusService
     ) { }
 
@@ -43,7 +40,7 @@ export class MiUsuarioComponent {
 
     async initialization(): Promise<void> {
         this.globalStatusService.setLoading(true);
-        const data = await this.apiService.getDatosUsuario();
+        const data = await this.authService.getDatosUsuario();
         this.userData = data;
         this.globalStatusService.setLoading(false);
     }

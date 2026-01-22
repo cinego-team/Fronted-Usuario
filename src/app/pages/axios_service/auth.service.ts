@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { axiosAuthService } from './axios.client';
+import { axiosAPIUsuarios, axiosAuthService } from './axios.client';
 import { config } from './env';
 
 @Injectable({
@@ -27,18 +27,18 @@ export class AuthService {
 
     decodeToken(token: string): any {
         try {
-        const base64Url = token.split(".")[1]
-        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/")
-        const jsonPayload = decodeURIComponent(
-            atob(base64)
-            .split("")
-            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-            .join(""),
-        )
-        return JSON.parse(jsonPayload)
+            const base64Url = token.split(".")[1]
+            const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/")
+            const jsonPayload = decodeURIComponent(
+                atob(base64)
+                    .split("")
+                    .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join(""),
+            )
+            return JSON.parse(jsonPayload)
         } catch (error) {
-        console.error("Error decodificando token:", error)
-        return null
+            console.error("Error decodificando token:", error)
+            return null
         }
     }
 
@@ -49,9 +49,9 @@ export class AuthService {
         const decoded = this.decodeToken(token)
         // El rol puede estar en diferentes propiedades según cómo se generó el token
         return decoded?.role?.name || decoded?.role || decoded?.userRole || null
-    } 
+    }
 
-    async login(credentials: { email: string; password: string;}, captcha: string): Promise<any> {
+    async login(credentials: { email: string; password: string; }, captcha: string): Promise<any> {
         const respuesta = (
             await axiosAuthService.post(config.APIUsuariosUrls.login, credentials, { headers: { "x-captcha-token": captcha || "" } })
         ).data;
@@ -113,5 +113,30 @@ export class AuthService {
         if (refreshToken) {
             localStorage.setItem('refresh_token', refreshToken);
         }
+    }
+
+    async getDatosUsuario(): Promise<{
+        nombre: string;
+        apellido: string;
+        email: string;
+        fechaNacimiento: string;
+        nroTelefono: string;
+        tipoCliente: {
+            denominacion: string;
+            descripcion: string;
+        };
+    }> {
+        const datos = (await axiosAPIUsuarios.get(config.APIUsuariosUrls.getDatosUsuario)).data;
+        return {
+            nombre: datos.nombre,
+            apellido: datos.apellido,
+            email: datos.email,
+            fechaNacimiento: datos.fechaNacimiento,
+            nroTelefono: datos.nroTelefono,
+            tipoCliente: {
+                denominacion: datos.tipoCliente.denominacion,
+                descripcion: datos.tipoCliente.descripcion,
+            },
+        };
     }
 }
