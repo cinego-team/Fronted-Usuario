@@ -198,3 +198,9 @@ body {
 .toggle-btn:hover img {
   opacity: 1;
 }
+#captcha {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
