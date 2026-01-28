@@ -31,8 +31,8 @@
         (click)="funcion.estaDisponible && seleccionarFuncion(funcion)"
       >
         <div class="funcion-header">
-          <h3>{{ funcion.fecha | date : 'dd/MM/yyyy' }}</h3>
-          <p class="funcion-hora">{{ funcion.fecha | date : 'HH:mm' }} hs</p>
+          <h3>{{ funcion.fecha | date: 'dd/MM/yyyy' }}</h3>
+          <p class="funcion-hora">{{ funcion.hora }} hs</p>
         </div>
 
         <div class="funcion-info">
@@ -54,8 +54,8 @@
       <h3>Tu selección:</h3>
       <p class="resumen-pelicula">{{ pelicula?.titulo }}</p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
-        {{ funcionSeleccionada.fecha | date : 'dd/MM/yyyy' }} -
-        {{ funcionSeleccionada.fecha | date : 'HH:mm' }} hs
+        {{ funcionSeleccionada.fecha | date: 'dd/MM/yyyy' }} -
+        {{ funcionSeleccionada.fecha | date: 'HH:mm' }} hs
       </p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
         {{ funcionSeleccionada?.formato?.nombre }} -
