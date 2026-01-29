@@ -13,6 +13,7 @@ export interface Funcion {
   id: number;
   estaDisponible: boolean;
   fecha: Date;
+  hora: string;
   idioma: {
     id: number;
     nombre: string;
@@ -44,7 +45,7 @@ export class PeliculaComponent implements OnInit {
   constructor(
     private router: Router,
     private readonly apiService: ApiService,
-    private readonly globalStatusService: GlobalStatusService
+    private readonly globalStatusService: GlobalStatusService,
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +66,11 @@ export class PeliculaComponent implements OnInit {
       this.globalStatusService.setLoading(false);
       return;
     }
-    this.funciones = funcionesBack;
+    this.funciones = funcionesBack.map((f) => ({
+      ...f,
+      hora: f.hora.slice(0, 5),
+    }));
+
     this.globalStatusService.setLoading(false);
   }
 
