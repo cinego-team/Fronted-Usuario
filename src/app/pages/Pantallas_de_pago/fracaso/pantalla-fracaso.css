@@ -1,0 +1,44 @@
+.pantalla-fracaso-page {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.pantalla-fracaso-page h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.pantalla-fracaso-page p {
+  text-align: left;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.pantalla-fracaso-page strong {
+  color: #ffd7d2;
+}
+
+.btn-volver {
+  background-color: #ebccc7;
+  color: #8a1009;
+  font-weight: bold;
+  border: none;
+  padding: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .pantalla-fracaso-page p {
+    font-size: 0.95rem;
+  }
+  .btn-volver {
+    font-size: 0.95rem;
+  }
+}

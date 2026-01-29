@@ -5,13 +5,14 @@ import { ApiService } from '../axios_service/api.service';
 import { Pelicula } from '../cartelera/cartelera';
 import { Funcion } from '../pelicula/pelicula';
 import { GlobalStatusService } from '../axios_service/global-status.service';
+import { AuthService } from '../axios_service/auth.service';
 
 interface Seat {
-  id: string; // "4C"
-  disponibilidadButacaId: number; // ID real del backend
-  row: string;
-  number: number;
-  status: string;
+    id: string; // "4C"
+    disponibilidadButacaId: number; // ID real del backend
+    row: string;
+    number: number;
+    status: string;
 }
 interface ButacaResponse {
     id: number;
@@ -26,8 +27,20 @@ interface ButacaResponse {
     };
 }
 
+interface Usuario {
+    nombre: string;
+    apellido: string;
+    email: string;
+    fechaNacimiento: string;
+    nroTelefono: string;
+    tipoCliente: {
+        denominacion: string;
+        descripcion: string;
+    }
+}
+
 export interface Seleccion {
-    funcionId: number;          
+    funcionId: number;
     asientos: string[],
     tituloPelicula: string,
     fecha: string,
@@ -54,18 +67,20 @@ export class SeleccionButacaComponent implements OnInit {
     total = signal(0);
     totalSelected = computed(() => this.selectedIds().size);
     seleccion: Seleccion = {
-        funcionId: 0,               
+        funcionId: 0,
         asientos: [],
         tituloPelicula: '',
         fecha: '',
         nombreFormato: '',
         precioButaca: null,
     }
+    userData: Usuario | null = null;
 
     constructor(
         private router: Router,
         private apiService: ApiService,
-        private readonly globalStatusService: GlobalStatusService
+        private readonly globalStatusService: GlobalStatusService,
+        private authService: AuthService
     ) { }
 
     //  CARGA INICIAL
@@ -91,7 +106,7 @@ export class SeleccionButacaComponent implements OnInit {
             this.globalStatusService.setLoading(true);
             if (this.pelicula && this.funcion) {
                 this.seleccion = {
-                    funcionId: this.funcion.id,   
+                    funcionId: this.funcion.id,
                     asientos: [],
                     tituloPelicula: this.pelicula.titulo,
                     fecha: new Date(this.funcion.fecha).toString(),
@@ -101,7 +116,8 @@ export class SeleccionButacaComponent implements OnInit {
                 };
 
                 const butacas: ButacaResponse[] = await this.apiService.getDisponibilidadByFuncionId(this.funcion.id);
-
+                const data = await this.authService.getDatosUsuario();
+                this.userData = data;
                 this.cargarButacasDesdeBack(butacas);
             } else {
                 alert('Ocurrió un error al cargar los datos.');
@@ -204,12 +220,12 @@ export class SeleccionButacaComponent implements OnInit {
     async pagar() {
         try {
             const idsSeleccionados = this.seats()
-            .filter(seat => this.selectedIds().has(seat.id))
-            .map(seat => seat.disponibilidadButacaId); // 👈 number[]
+                .filter(seat => this.selectedIds().has(seat.id))
+                .map(seat => seat.disponibilidadButacaId); // 👈 number[]
 
             const payload = {
-            funcionId: this.seleccion.funcionId,
-            disponibilidadButacaIds: idsSeleccionados,
+                funcionId: this.seleccion.funcionId,
+                disponibilidadButacaIds: idsSeleccionados,
             };
 
             console.log('PAYLOAD FRONTEND:', payload);
@@ -217,10 +233,10 @@ export class SeleccionButacaComponent implements OnInit {
             const resp = await this.apiService.crearVenta(payload);
 
             if (resp.urlPagoMP) {
-            window.location.href = resp.urlPagoMP;
+                window.location.href = resp.urlPagoMP;
             } else {
-            alert('No se pudo iniciar el pago');
-            console.error(resp);
+                alert('No se pudo iniciar el pago');
+                console.error(resp);
             }
         } catch (error: any) {
             console.error('🔥 ERROR EN ABRIR VENTA:', error?.response?.data || error);

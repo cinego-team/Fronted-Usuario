@@ -31,15 +31,14 @@
         (click)="funcion.estaDisponible && seleccionarFuncion(funcion)"
       >
         <div class="funcion-header">
-          <h3>{{ funcion.fecha | date : 'dd/MM/yyyy' }}</h3>
-          <p class="funcion-hora">{{ funcion.fecha | date : 'HH:mm' }} hs</p>
+          <h3>{{ funcion.fecha | date: 'dd/MM/yyyy' }}</h3>
+          <p class="funcion-hora">{{ funcion.fecha | date: 'HH:mm' }} hs</p>
         </div>
 
         <div class="funcion-info">
           <p class="funcion-detalles">
-            <span class="badge">{{ funcion?.formato?.nombre }}</span>
-            <span class="badge">{{ funcion?.idioma?.nombre }}</span>
-            <span class="badge">{{ funcion?.sala?.nroSala }}</span>
+            <span class="badge">{{ funcion.formato.nombre }}</span>
+            <span class="badge">{{ funcion.idioma.nombre }}</span>
           </p>
           <p class="funcion-precio">${{ funcion.formato.precio }}</p>
         </div>
@@ -54,11 +53,11 @@
       <h3>Tu selección:</h3>
       <p class="resumen-pelicula">{{ pelicula?.titulo }}</p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
-        {{ funcionSeleccionada.fecha | date : 'dd/MM/yyyy' }} -
-        {{ funcionSeleccionada.fecha | date : 'HH:mm' }} hs
+        {{ funcionSeleccionada.fecha | date: 'dd/MM/yyyy' }} -
+        {{ funcionSeleccionada.fecha | date: 'HH:mm' }} hs
       </p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">
-        {{ funcionSeleccionada?.formato?.nombre }} -
+        {{ funcionSeleccionada.formato.nombre }} -
         {{ funcionSeleccionada.idioma.nombre || 'Sin idioma' }}
       </p>
       <p class="resumen-detalle" *ngIf="funcionSeleccionada">

@@ -6,6 +6,7 @@ import { CarteleraComponent } from './pages/cartelera/cartelera';
 import { PeliculaComponent } from './pages/pelicula/pelicula';
 import { notificaciondeenvioComponent } from './pages/NotificacionDeEnvio/notificaciondeenvio';
 import { MiUsuarioComponent } from './pages/miUsuario/mi-usuario';
+import { PantallaExitoComponent } from './pages/Pantallas_de_pago/exito/pantalla-exito';
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'register', component: RegisterComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'seleccion-butaca/:idFuncion', component: SeleccionButacaComponent },
     { path: 'notificaciondeenvio', component: notificaciondeenvioComponent },
     { path: 'mi-usuario', component: MiUsuarioComponent },
+    { path: 'pantalla-exito', component: PantallaExitoComponent },
 ];
 
