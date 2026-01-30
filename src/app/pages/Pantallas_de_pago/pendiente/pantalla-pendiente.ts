@@ -10,7 +10,7 @@ import { Header } from '../../../shared/header/header';
     templateUrl: './pantalla-pendiente.html',
     styleUrl: './pantalla-pendiente.css',
 })
-export class PantallaPendienteComponentt implements OnInit, OnDestroy {
+export class PantallaPendienteComponent implements OnInit, OnDestroy {
     contador = 15;
     private intervalo: any;
 

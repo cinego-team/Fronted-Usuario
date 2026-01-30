@@ -1,13 +1,13 @@
 export const config = {
 
     APIPeliculasUrls: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: '181.16.167.229:3000',
         getPeliculaById: (id: number) => `microservicio-peliculas/pelicula/${id}`,
         getAllPeliculas: 'microservicio-peliculas/peliculas',
     },
 
     APIUsuariosUrls: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: '181.16.167.229:3000',
         getDatosClienteById: (id: number) => `microservicio-usuarios/datos-cliente/${id}`,
         refreshToken: 'microservicio-usuarios/refresh-token',
         register: 'microservicio-usuarios/usuario/register',
@@ -16,7 +16,7 @@ export const config = {
     },
 
     APIFuncionesUrls: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: '181.16.167.229:3000',
 
         findAllByPeliculaId: (id: number) =>
             `microservicio-funciones-y-salas/funciones-por-pelicula/${id}`,
@@ -28,7 +28,7 @@ export const config = {
             `microservicio-funciones-y-salas/funcion/${id}`,
     },
     APIVentasUrls: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: '181.16.167.229:3000',
         crearVenta: 'microservicio-ventas/abrir-venta',
     }
 }

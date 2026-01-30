@@ -7,6 +7,8 @@ import { PeliculaComponent } from './pages/pelicula/pelicula';
 import { notificaciondeenvioComponent } from './pages/NotificacionDeEnvio/notificaciondeenvio';
 import { MiUsuarioComponent } from './pages/miUsuario/mi-usuario';
 import { PantallaExitoComponent } from './pages/Pantallas_de_pago/exito/pantalla-exito';
+import { PantallaFracasoComponent } from './pages/Pantallas_de_pago/fracaso/pantalla-fracaso';
+import { PantallaPendienteComponent } from './pages/Pantallas_de_pago/pendiente/pantalla-pendiente';
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'register', component: RegisterComponent },
@@ -18,5 +20,7 @@ export const routes: Routes = [
     { path: 'notificaciondeenvio', component: notificaciondeenvioComponent },
     { path: 'mi-usuario', component: MiUsuarioComponent },
     { path: 'pantalla-exito', component: PantallaExitoComponent },
+    { path: 'pantalla-fracaso', component: PantallaFracasoComponent },
+    { path: 'pantalla-pendiente', component: PantallaPendienteComponent },
 ];
 
