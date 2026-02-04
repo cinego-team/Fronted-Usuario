@@ -1,13 +1,13 @@
 export const config = {
 
     APIPeliculasUrls: {
-        baseUrl: 'http://181.16.167.229:3000',
+        baseUrl: 'https://microservicio-de-peliculas.vercel.app',
         getPeliculaById: (id: number) => `microservicio-peliculas/pelicula/${id}`,
         getAllPeliculas: 'microservicio-peliculas/peliculas',
     },
 
     APIUsuariosUrls: {
-        baseUrl: 'http://181.16.167.229:3000',
+        baseUrl: 'https://servicio-usuarios.vercel.app',
         getDatosClienteById: (id: number) => `microservicio-usuarios/datos-cliente/${id}`,
         refreshToken: 'microservicio-usuarios/refresh-token',
         register: 'microservicio-usuarios/usuario/register',
@@ -16,7 +16,7 @@ export const config = {
     },
 
     APIFuncionesUrls: {
-        baseUrl: 'http://181.16.167.229:3000',
+        baseUrl: 'https://servicio-funciones-y-salas.vercel.app',
 
         findAllByPeliculaId: (id: number) =>
             `microservicio-funciones-y-salas/funciones-por-pelicula/${id}`,
@@ -28,7 +28,7 @@ export const config = {
             `microservicio-funciones-y-salas/funcion/${id}`,
     },
     APIVentasUrls: {
-        baseUrl: 'http://181.16.167.229:3000',
+        baseUrl: 'https://servicio-ventas.vercel.app',
         crearVenta: 'microservicio-ventas/abrir-venta',
     }
 }
