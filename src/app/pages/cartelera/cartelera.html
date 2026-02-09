@@ -18,7 +18,8 @@
       </div>
     </div>
   </div>
-  <div class="peliculas-grid" *ngIf="peliculas.length === 0">
+  <div class="loading" *ngIf="peliculas.length === 0">
+    <div class="spinner"></div>
     <p>Cargando peliculas disponibles...</p>
   </div>
 </div>
