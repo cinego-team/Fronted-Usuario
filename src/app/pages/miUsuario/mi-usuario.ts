@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../axios_service/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GlobalStatusService } from '../axios_service/global-status.service';
+import { GlobalStatusService } from '../../services/global-status.service';
 
 interface Usuario {
     nombre: string;

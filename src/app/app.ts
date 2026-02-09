@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TokenTimeoutService } from './pages/axios_service/tokenTimeout.service';
+import { TokenTimeoutService } from './services/tokenTimeout.service';
 
 @Component({
     selector: 'app-root',

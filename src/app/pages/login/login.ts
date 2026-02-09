@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../axios_service/auth.service';
-import { TokenTimeoutService } from '../axios_service/tokenTimeout.service';
+import { AuthService } from '../../services/auth.service';
+import { TokenTimeoutService } from '../../services/tokenTimeout.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -79,14 +79,14 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
                 const userRole = this.authService.getUserRole()
 
                 if (userRole !== this.EXPECTED_ROLE) {
-                // Si el rol no coincide, cerrar sesión inmediatamente
-                this.authService.logout()
-                alert(
-                    `Acceso denegado. Este portal es solo para usuarios con rol ${this.EXPECTED_ROLE}. Tu rol es: ${userRole}`,
-                )
-                ;(window as any).grecaptcha.reset()
-                this.captchaToken = null
-                return
+                    // Si el rol no coincide, cerrar sesión inmediatamente
+                    this.authService.logout()
+                    alert(
+                        `Acceso denegado. Este portal es solo para usuarios con rol ${this.EXPECTED_ROLE}. Tu rol es: ${userRole}`,
+                    )
+                        ; (window as any).grecaptcha.reset()
+                    this.captchaToken = null
+                    return
                 }
 
                 // Si el rol es correcto, continuar normalmente

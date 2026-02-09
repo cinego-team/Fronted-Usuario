@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { axiosAPIUsuarios, axiosAuthService } from './axios.client';
-import { config } from './env';
+import { axiosAPIUsuarios, axiosAuthService } from './axios_service/axios.client';
+import { config } from './axios_service/env';
 
 @Injectable({
     providedIn: 'root',

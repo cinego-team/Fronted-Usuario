@@ -1,11 +1,11 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../axios_service/api.service';
+import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 import { Pelicula } from '../cartelera/cartelera';
 import { Funcion } from '../pelicula/pelicula';
-import { GlobalStatusService } from '../axios_service/global-status.service';
-import { AuthService } from '../axios_service/auth.service';
+import { GlobalStatusService } from '../../services/global-status.service';
+import { AuthService } from '../../services/auth.service';
 
 interface Seat {
     id: string; // "4C"

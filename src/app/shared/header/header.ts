@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../pages/axios_service/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 interface usuario {
     nombre: string;
