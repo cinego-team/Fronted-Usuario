@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { GlobalStatusService } from '../../services/global-status.service';
 import { Pelicula } from '../cartelera/cartelera';
 import { Header } from '../../shared/header/header';
 
@@ -42,7 +41,6 @@ export class PeliculaComponent implements OnInit {
     constructor(
         private router: Router,
         private readonly apiService: ApiService,
-        private readonly globalStatusService: GlobalStatusService,
     ) { }
 
     ngOnInit(): void {
@@ -53,22 +51,18 @@ export class PeliculaComponent implements OnInit {
     }
 
     async initialization(): Promise<void> {
-        this.globalStatusService.setLoading(true);
         if (!this.pelicula) {
             throw new Error('Ocurrió un error al cargar la película.');
         }
         const funcionesBack = await this.apiService.getFuncionesByPeliculaId(this.pelicula.id);
         if (funcionesBack.length === 0) {
             alert('No hay funciones para mostrar.');
-            this.globalStatusService.setLoading(false);
             return;
         }
         this.funciones = funcionesBack.map((f) => ({
             ...f,
             hora: f.hora.slice(0, 5),
         }));
-
-        this.globalStatusService.setLoading(false);
     }
 
     seleccionarFuncion(funcion: Funcion): void {

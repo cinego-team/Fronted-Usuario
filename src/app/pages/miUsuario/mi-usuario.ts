@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GlobalStatusService } from '../../services/global-status.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 interface Usuario {
     nombre: string;
@@ -31,7 +30,6 @@ export class MiUsuarioComponent {
     constructor(
         private authService: AuthService,
         private router: Router,
-        private readonly globalStatusService: GlobalStatusService
     ) { }
 
     ngOnInit(): void {
@@ -39,10 +37,8 @@ export class MiUsuarioComponent {
     }
 
     async initialization(): Promise<void> {
-        this.globalStatusService.setLoading(true);
         const data = await this.authService.getDatosUsuario();
         this.userData = data;
-        this.globalStatusService.setLoading(false);
     }
 
     logout(): void {

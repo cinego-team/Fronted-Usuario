@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { GlobalStatusService } from '../../services/global-status.service';
 import { Header } from '../../shared/header/header';
 
 export interface Pelicula {
@@ -30,7 +29,6 @@ export class CarteleraComponent implements OnInit {
     constructor(
         private router: Router,
         private readonly apiService: ApiService,
-        private readonly globalStatusService: GlobalStatusService
     ) { }
 
     selectedRow: number | null = null;
@@ -41,15 +39,12 @@ export class CarteleraComponent implements OnInit {
     }
 
     async initialization(): Promise<void> {
-        this.globalStatusService.setLoading(true);
         const peliculasBack = await this.apiService.getAllPeliculas();
         if (peliculasBack.length === 0) {
             alert('No hay peliculas para mostrar.');
-            this.globalStatusService.setLoading(false);
             return;
         }
         this.peliculas = peliculasBack;
-        this.globalStatusService.setLoading(false);
     }
 
     seleccionarPelicula(pelicula: Pelicula): void {

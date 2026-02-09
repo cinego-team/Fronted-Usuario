@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Pelicula } from '../cartelera/cartelera';
 import { Funcion } from '../pelicula/pelicula';
-import { GlobalStatusService } from '../../services/global-status.service';
 import { AuthService } from '../../services/auth.service';
 
 interface Seat {
@@ -79,7 +78,6 @@ export class SeleccionButacaComponent implements OnInit {
     constructor(
         private router: Router,
         private apiService: ApiService,
-        private readonly globalStatusService: GlobalStatusService,
         private authService: AuthService
     ) { }
 
@@ -103,7 +101,6 @@ export class SeleccionButacaComponent implements OnInit {
 
     async initialization() {
         try {
-            this.globalStatusService.setLoading(true);
             if (this.pelicula && this.funcion) {
                 this.seleccion = {
                     funcionId: this.funcion.id,
@@ -123,8 +120,6 @@ export class SeleccionButacaComponent implements OnInit {
                 alert('Ocurrió un error al cargar los datos.');
                 return;
             }
-
-            this.globalStatusService.setLoading(false);
         } catch (err) {
             console.error('Error cargando datos de función/película/butacas', err);
         }

@@ -2,7 +2,7 @@
 <div class="page cartelera">
   <h1 class="titulo-cartelera">CARTELERA</h1>
 
-  <div class="peliculas-grid">
+  <div class="peliculas-grid" *ngIf="peliculas.length > 0">
     <div
       class="pelicula-card"
       *ngFor="let pelicula of peliculas"
@@ -17,5 +17,8 @@
         <p class="pelicula-detalles">{{ pelicula.clasificacion }} - {{ pelicula.genero }}</p>
       </div>
     </div>
+  </div>
+  <div class="peliculas-grid" *ngIf="peliculas.length === 0">
+    <p>Cargando peliculas disponibles...</p>
   </div>
 </div>
