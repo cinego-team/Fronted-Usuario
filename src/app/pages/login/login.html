@@ -11,7 +11,7 @@
       <input type="email" id="usuario" formControlName="email" />
 
       @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
-      <small class="text-danger">Ingresá un email válido.</small>
+        <small class="text-danger">Ingresá un email válido.</small>
       }
 
       <label for="password">Contraseña</label>
@@ -31,7 +31,11 @@
       <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
       <div class="actions">
-        <button type="submit" class="btn-login">INICIAR SESIÓN</button>
+        <button type="submit" class="btn-login" [disabled]="loading" (click)="OnLogin()">
+          <span *ngIf="!loading">INICIAR SESIÓN</span>
+
+          <span *ngIf="loading" class="btn-spinner"></span>
+        </button>
       </div>
 
       <div id="captcha"></div>

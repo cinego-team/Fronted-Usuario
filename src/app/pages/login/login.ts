@@ -15,6 +15,7 @@ declare const grecaptcha: any;
 })
 export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     formulario: FormGroup;
+    loading = false;
     captchaToken: string | null = null;
     mostrarPassword = false;
     private captchaId: number | null = null;
@@ -61,42 +62,50 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     OnLogin() {
-        if (this.formulario.invalid) {
-            alert('Por favor, completa todos los campos correctamente.');
-            this.formulario.markAllAsTouched();
-            return;
-        }
-        if (!this.captchaToken) {
-            alert("Por favor completa el captcha");
-            return;
-        }
-        this.authService
-            .login({
-                email: this.formulario.value.email,
-                password: this.formulario.value.password,
-            }, this.captchaToken)
-            .then(() => {
-                const userRole = this.authService.getUserRole()
+        try {
+            if (this.loading) return;
 
-                if (userRole !== this.EXPECTED_ROLE) {
-                    // Si el rol no coincide, cerrar sesión inmediatamente
-                    this.authService.logout()
-                    alert(
-                        `Acceso denegado. Este portal es solo para usuarios con rol ${this.EXPECTED_ROLE}. Tu rol es: ${userRole}`,
-                    )
-                        ; (window as any).grecaptcha.reset()
-                    this.captchaToken = null
-                    return
-                }
+            this.loading = true;
+            if (this.formulario.invalid) {
+                alert('Por favor, completa todos los campos correctamente.');
+                this.formulario.markAllAsTouched();
+                return;
+            }
+            if (!this.captchaToken) {
+                alert("Por favor completa el captcha");
+                return;
+            }
+            this.authService
+                .login({
+                    email: this.formulario.value.email,
+                    password: this.formulario.value.password,
+                }, this.captchaToken)
+                .then(() => {
+                    const userRole = this.authService.getUserRole()
 
-                // Si el rol es correcto, continuar normalmente
-                this.tokenTimeoutService.startCountdown()
-                this.router.navigate(["/cartelera"])
-            })
-            .catch((error) => {
-                alert('Login fallido. Verifica tus credenciales.');
-                (window as any).grecaptcha.reset();
-                this.captchaToken = null;
-            });
+                    if (userRole !== this.EXPECTED_ROLE) {
+                        // Si el rol no coincide, cerrar sesión inmediatamente
+                        this.authService.logout()
+                        alert(
+                            `Acceso denegado. Este portal es solo para usuarios con rol ${this.EXPECTED_ROLE}. Tu rol es: ${userRole}`,
+                        )
+                            ; (window as any).grecaptcha.reset()
+                        this.captchaToken = null
+                        return
+                    }
+
+                    // Si el rol es correcto, continuar normalmente
+                    this.tokenTimeoutService.startCountdown()
+                    this.router.navigate(["/cartelera"])
+                })
+                .catch((error) => {
+                    alert('Login fallido. Verifica tus credenciales.');
+                    (window as any).grecaptcha.reset();
+                    this.captchaToken = null;
+                });
+        } finally {
+            this.loading = false;
+        }
+
     }
 }
