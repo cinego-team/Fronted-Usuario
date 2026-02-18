@@ -31,11 +31,7 @@
       <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
       <div class="actions">
-        <button type="submit" class="btn-login" [disabled]="loading" (click)="OnLogin()">
-          <span *ngIf="!loading">INICIAR SESIÓN</span>
-
-          <span *ngIf="loading" class="btn-spinner"></span>
-        </button>
+        <button type="submit" class="btn-login">INICIAR SESIÓN</button>
       </div>
 
       <div id="captcha"></div>
