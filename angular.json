@@ -14,19 +14,13 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              
-                { "glob": "**/*", "input": "src/assets", "output": "/assets" },
-                { "input": "src/favicon.ico", "output": "/", "glob": "favicon.ico" }
-              
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" },
+              { "input": "src/favicon.ico", "output": "/", "glob": "favicon.ico" }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -53,6 +47,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "allowedHosts": true
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
@@ -70,20 +67,13 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              
-                { "glob": "**/*", "input": "src/assets", "output": "/assets" },
-               { "input": "src/favicon.ico", "output": "/", "glob": "favicon.ico" }
-              
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" },
+              { "input": "src/favicon.ico", "output": "/", "glob": "favicon.ico" }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           }
         }
       }
