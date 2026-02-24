@@ -114,8 +114,6 @@ axiosAPIPromociones.interceptors.request.use((config) => {
   if (refreshToken) {
     config.headers['refresh-token'] = refreshToken;
   }
-  if (captchaToken) {
-    config.headers['x-captcha-token'] = captchaToken;
-  }
+
   return config;
 });
