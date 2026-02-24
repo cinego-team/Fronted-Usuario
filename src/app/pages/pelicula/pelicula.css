@@ -36,7 +36,7 @@
 @media (min-width: 992px) {
   .pelicula-info {
     padding: 1rem 1.5rem;
-    grid-template-columns: 160px 1fr 380px;
+    grid-template-columns: 160px 1fr 1.5fr;
     grid-template-areas: 'poster detalles sinopsis';
     align-items: start;
   }
@@ -133,6 +133,25 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.sin-funciones {
+  background-color: #6b2424;
+  border: 3px solid #8b3a3a;
+  border-radius: 20px;
+  padding: 1rem;
+  min-height: auto;
+  max-height: auto;
+  max-width: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin: 2rem auto 0;
+  margin-bottom: 2rem;
 }
 
 .funcion-card {

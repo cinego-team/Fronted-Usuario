@@ -63,6 +63,7 @@ export class SeleccionButacaComponent implements OnInit {
     seats = signal<Seat[]>([]);
     selectedIds = signal<Set<string>>(new Set());
     subtotal = signal(0);
+    descuento = signal(0);
     total = signal(0);
     totalSelected = computed(() => this.selectedIds().size);
     seleccion: Seleccion = {
@@ -116,6 +117,8 @@ export class SeleccionButacaComponent implements OnInit {
                 const data = await this.authService.getDatosUsuario();
                 this.userData = data;
                 this.cargarButacasDesdeBack(butacas);
+                // const promocion = await this.apiService.getPromocionByUserId(this.userData.id)
+                // this.descuento.set(promocion);
             } else {
                 alert('Ocurrió un error al cargar los datos.');
                 return;
@@ -175,6 +178,7 @@ export class SeleccionButacaComponent implements OnInit {
             const subtotal = count * this.seleccion.precioButaca;
             this.subtotal.set(subtotal);
             this.total.set(subtotal);
+            // this.total.set(subtotal - this.seleccion.precioButaca * (1 - this.descuento / 100));
         } else {
             alert('Ocurrió un error al cargar los datos.')
             return;
