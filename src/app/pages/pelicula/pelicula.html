@@ -31,7 +31,7 @@
         (click)="funcion.estaDisponible && seleccionarFuncion(funcion)"
       >
         <div class="funcion-header">
-          <h3>{{ funcion.fecha | date: 'dd/MM/yyyy' }}</h3>
+          <h3>{{ funcion.fecha | date: 'dd/MM/yyyy' : 'UTC' }}</h3>
           <p class="funcion-hora">{{ funcion.hora }} hs</p>
         </div>
 

@@ -49,7 +49,7 @@
         </div>
         <div class="summary-item">
           <span>Descuento</span>
-          <span>$0</span>
+          <span>-${{ descuentoMostrar() }}</span>
         </div>
         <div class="summary-item total">
           <span>Total</span>
@@ -67,8 +67,8 @@
         <div class="col left">
           <h3>Tu selección:</h3>
           <p>{{ this.seleccion!.tituloPelicula }}</p>
-          <p>{{ this.seleccion!.fecha | date : 'dd/MM/yyyy' }}</p>
-          <p>{{ this.seleccion!.fecha | date : 'HH:mm' }} hs</p>
+          <p>{{ this.seleccion!.fecha | date: 'dd/MM/yyyy' }}</p>
+          <p>{{ this.seleccion!.fecha | date: 'HH:mm' }} hs</p>
           <p>Formato - {{ this.seleccion!.nombreFormato }}</p>
         </div>
 
