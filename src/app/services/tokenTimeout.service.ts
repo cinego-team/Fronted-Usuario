@@ -5,7 +5,7 @@ import { AuthService } from "./auth.service";
 
 export class TokenTimeoutService {
     private timeoutRef!: ReturnType<typeof setTimeout>;
-    private timeoutMs = 15 * 60 * 1000; // 15 minutos, duracion del token
+    private timeoutMs = 120 * 60 * 1000; // 15 minutos, duracion del token
     constructor(private authService: AuthService) { }
 
     startCountdown() {

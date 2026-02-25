@@ -10,7 +10,6 @@ import { PantallaExitoComponent } from './pages/Pantallas_de_pago/exito/pantalla
 import { PantallaFracasoComponent } from './pages/Pantallas_de_pago/fracaso/pantalla-fracaso';
 import { PantallaPendienteComponent } from './pages/Pantallas_de_pago/pendiente/pantalla-pendiente';
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'cartelera', component: CarteleraComponent },
@@ -22,5 +21,6 @@ export const routes: Routes = [
     { path: 'pantalla-exito', component: PantallaExitoComponent },
     { path: 'pantalla-fracaso', component: PantallaFracasoComponent },
     { path: 'pantalla-pendiente', component: PantallaPendienteComponent },
+    { path: '**', redirectTo: 'login' },
 ];
 
